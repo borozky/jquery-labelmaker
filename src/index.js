@@ -3,11 +3,13 @@ import $ from "jquery";
 import "jquery-ui-bundle";
 import "./scripts/drag-multiple";
 import ruler from "./scripts/ruler";
-
 import Defaults from "./scripts/Defaults";
 import {AppCanvas, appCanvas} from "./scripts/AppCanvas";
-
 import "./styles/index.css";
+
+
+window.jQuery = $;
+require("jquery-ui-touch-punch");
 
 let myRuler = new ruler({
     container: document.getElementById('CanvasRuler'),
