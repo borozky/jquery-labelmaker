@@ -1,0 +1,39 @@
+#LeftSidebar {
+    left: 0px;
+    top: 30px;
+    width: 60px;
+    bottom: 16px;
+    cursor: default;
+    background: #fff;
+    position: absolute;
+    border-top: 1px solid #e5e5e5;
+    overflow: auto;
+}
+
+#LeftSidebar ul {
+    padding: 0 2px;
+    margin: 0;
+}
+
+#LeftSidebar .item-types {
+    margin: 10px auto;
+    text-align: center;
+    padding: 2px;
+    border: 1px solid transparent;
+}
+
+#LeftSidebar .item-types:hover {
+    border: 1px solid blue;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#LeftSidebar .item-types img {
+    width: 30px;
+}
+
+#LeftSidebar .item-types span {
+    display: inline-block;
+    width: 100%;
+    margin-top: 4px;
+}

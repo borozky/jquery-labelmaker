@@ -1,0 +1,80 @@
+#WorkingArea {
+    position: absolute;
+    cursor: default;
+    background-color: #ccc;
+    border-style: solid;
+    border-color: #e5e5e5;
+    border-width: 1px 0px 0px 1px;
+    right: 240px;
+    left: 60px;
+    top: 30px;
+    bottom: 16px;
+    touch-action: none;
+    overflow: auto;
+    padding: 16px 400px 0px 16px;
+}
+
+#AppCanvas {
+    width: 21.5cm; 
+    height: 29.7cm; 
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 0 0.5cm rgba(0,0,0,.5);
+    box-shadow: 0 0 0.5cm rgba(0,0,0,.5);
+    position: relative;
+}
+
+#AppCanvas .canvas-item {
+    display: inline-block;
+    position: absolute !important;
+}
+#AppCanvas .canvas-item .ui-icon {
+    visibility: hidden;
+}
+
+#AppCanvas .canvas-item:hover .ui-icon {
+    visibility: visible;
+}
+
+#AppCanvas .canvas-item.ui-selected .ui-icon {
+    visibility: visible;
+}
+#AppCanvas .canvas-item:hover {
+    outline: 1px dotted #d2d2d2;
+}
+#AppCanvas .canvas-item.text,
+#AppCanvas .canvas-item.textbox,
+#AppCanvas .canvas-item.date {
+    min-width: 5px;
+    min-height: 5px;
+}
+
+#AppCanvas .canvas-item.ellipse {
+    border-radius: 100%;
+}
+#AppCanvas .canvas-item.ui-selected {
+    outline: 1px dashed black;
+}
+
+#AppCanvas .canvas-item.image img {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+#AppCanvas .canvas-item.barcode svg {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+#CanvasRuler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 400px;
+    z-index: -1;
+}

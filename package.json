@@ -1,0 +1,20 @@
+{
+  "name": "jquerylabelmaker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-bundle": "^1.12.1",
+    "jquery-ui-touch-punch": "^0.2.3",
+    "jsbarcode": "^3.8.0",
+    "moment": "^2.20.1",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

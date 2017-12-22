@@ -1,0 +1,60 @@
+export default {
+    TEXT: {
+        value: "TEXT",
+        fontSize: 20,
+        fontFamily: "Segoe UI",
+        color: "#000000",
+        x: 0, 
+        y: 0,
+        lockScalingX: true,
+        lockScalingY: true,
+        lockUniScaling: true,
+        borderColor: "red",
+        cornerColor: "green",
+        cornerSize: 6,
+        transparentCorners: false,
+    },
+    TEXTBOX: {
+        value: "Lorem ipsum sit dolor amet",
+        fontSize: 20,
+        fontFamily: "Segoe UI",
+        color: "#000000",
+        x: 0, 
+        y: 0,
+        lineHeight: 1,
+        letterSpacing: "1px"
+    },
+    RECTANGLE: {
+        fill: "#dddddd",
+        width: 80,
+        height: 80,
+        x: 0,
+        y: 0,
+        strokeWidth: 2,
+        stroke: "#000000"
+    },
+    ELLIPSE: {
+        fill: "#ffffff",
+        width: 80,
+        height: 80,
+        x: 0,
+        y: 0,
+        rx: 80,
+        ry: 80,
+        strokeWidth: 2,
+        stroke: "#000000"
+    },
+    LINE: {
+        x1: 10,
+        y1: 10,
+        x2: 300,
+        y2: 10,
+        stroke: "red",
+        strokeWidth: 5,
+        lockScalingY: true,
+        borderColor: "red",
+        cornerColor: "green",
+        cornerSize: 6,
+        transparentCorners: false,
+    }
+}
