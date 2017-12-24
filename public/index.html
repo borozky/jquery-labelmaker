@@ -145,7 +145,7 @@
 
                     <div class="row">
                         <h4 class="row-title">Color</h4>
-                        <input type="color" name="color" value="#000000"/>
+                        <input type="text" class="jscolor" name="color" value="#000000"/>
                     </div>
 
                     <div class="row">
@@ -173,13 +173,13 @@
 
                     <div class="row">
                         <h4 class="row-title">Background</h4>
-                        <input type="color" name="background-color" value="#fff" />
+                        <input type="text" class="jscolor" name="background-color" value="#fff" />
                     </div>
 
                     <div class="row">
                         <h4 class="row-title">Border</h4>
                         <input type="number" step="1" value="2" min="0" name="border-width">
-                        &nbsp; <input type="color" name="border-color" value="#000000">
+                        &nbsp; <input type="text" class="jscolor" name="border-color" value="#000000">
                     </div>
 
                 </div>
@@ -222,7 +222,7 @@
 
                     <div class="row">
                         <h4 class="row-title">Color</h4>
-                        <input type="color" name="line-color" value="#0000000">
+                        <input type="text" class="jscolor" name="line-color" value="#0000000">
                     </div>
                 </div>
             </div>
@@ -246,5 +246,6 @@
             <div id="CanvasRuler"></div>
             <div id="AppCanvas"></div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.min.js"></script>
   </body>
 </html>

@@ -25,7 +25,7 @@ export default class FontControls extends RightSidebarControls {
         this.$fontSize = this.$element.find("input[name='font-size']");
         this.$fontStyles = this.$element.find(".font-style");
         this.$fontAlignments = this.$element.find(".font-alignment");
-        this.$fontColor = this.$element.find("input[type='color']");
+        this.$fontColor = this.$element.find("input[name='color']");
         this.$letterSpacing = this.$element.find("input[name='letter-spacing']");
         this.$lineHeight = this.$element.find("input[name='line-height']");
 
@@ -154,7 +154,7 @@ export default class FontControls extends RightSidebarControls {
             return;
         }
 
-        this.item.set("color", e.target.value);
+        this.item.set("color", "#" + e.target.value);
         this.options.onUpdate(this.item);
     }
 
