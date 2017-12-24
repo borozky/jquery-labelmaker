@@ -100,6 +100,7 @@ export class AppCanvas {
 
 export let appCanvas = new AppCanvas($("#AppCanvas"), {
     onItemSelected: function(item) {
+        rightSidebar.hideAllControls();
         rightSidebar.displayControlsFor(item);
     },
     onMultipleItemsSelected: function(items) {
