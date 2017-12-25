@@ -114,7 +114,8 @@ export class AppCanvas {
                 $element.append($(`<span class='value'>${item.value.toString()}</span>`));
                 break;
             case "DATE":
-                $element.append($(`<span class='value'>${moment(item.value).format(item.format)}</span>`));
+                let date = moment(item.value).format(item.format);
+                $element.append($(`<span class='value'>${date}</span>`));
                 break;
             case "RECTANGLE":
             case "ELLIPSE":

@@ -74,7 +74,7 @@ export let leftSidebar = new LeftSidebar($("#LeftSidebar"), {
                     type: "ADD_CANVAS_ITEM",
                     payload: {
                         ...item,
-                        value: moment().format().toString(),
+                        value: (new Date()).toLocaleString(),
                         format: "DD-MM-YYYY"
                     }
                 })
