@@ -15,59 +15,33 @@
     bottom: 15px;
 }
 
-#RightSidebar .control-section {
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border-bottom: 1px solid #ddd;
-
-}
-
-#RightSidebar .control-section .control-section-title {
-    text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    font-weight: normal;
-    font-size: 14px;
-}
-
-#RightSidebar .control-section .control-section-body {
+#RightSidebar .control {
     padding-left: 10px;
     padding-right: 10px;
 }
-
-#RightSidebar .control-section .control-section-body input[type='number'] {
-    width: 50px;
+#RightSidebar .control .title {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 2px;
 }
 
-#RightSidebar .control-section .control-section-body input[name='font-family'] {
-}
-
-#RightSidebar .control-section .control-section-body input[name='font-size'] {
+#RightSidebar .control input[type='number'] {
     width: 40px;
 }
 
-#RightSidebar .control-section .control-section-body .row {
-    margin-bottom: 20px;
-}
-
-#RightSidebar .control-section .control-section-body .row .row-title {
-    margin: 0 0 3px 0;
-    font-weight: normal;
-}
-
-#RightSidebar .control-section .control-section-body button.active {
+#RightSidebar .control button.active {
     background-color: royalblue;
     color: #fff;
     border: 2px solid royalblue;
 }
 
-#RightSidebar .control-section .control-section-body input[name='content'] {
+#ItemControl {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+#ItemControl button {
+    display: block;
     width: 100%;
-    max-width: 220px;
 }
-
-#RightSidebar .control-section .control-section-body input[name='line-height'],
-#RightSidebar .control-section .control-section-body input[name='letter-spacing'] {
-    width: 40px;
-}
-

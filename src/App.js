@@ -1,8 +1,8 @@
-import AppHeader from "./scripts/Sections/AppHeader";
-import AppFooter from "./scripts/Sections/AppFooter";
-import LeftSidebar from "./scripts/Sections/LeftSidebar";
-import RightSidebar from "./scripts/Sections/RightSidebar";
-import AppCanvas from "./scripts/AppCanvas";
+
+import {appFooter} from "./scripts/Sections/AppFooter";
+import {leftSidebar} from "./scripts/Sections/LeftSidebar";
+import {rightSidebar} from "./scripts/Sections/RightSidebar";
+import AppCanvas, {appCanvas} from "./scripts/AppCanvas";
 
 export default class App {
     
@@ -14,10 +14,10 @@ export default class App {
         this.$element = $element;
 
         this.AppHeader = new AppHeader();
-        this.AppFooter = new AppFooter();
-        this.LeftSidebar = new LeftSidebar();
-        this.RightSidebar = new RightSidebar();
-        this.AppCanvas = new AppCanvas();
+        this.AppFooter = appFooter;
+        this.LeftSidebar = leftSidebar;
+        this.RightSidebar = rightSidebar;
+        this.AppCanvas = appCanvas;
     }
 
 }

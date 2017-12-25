@@ -4,6 +4,7 @@ import "jquery-ui-bundle";
 import "./scripts/drag-multiple";
 import ruler from "./scripts/ruler";
 import Defaults from "./scripts/Defaults";
+import {leftSidebar} from "./scripts/Sections/LeftSidebar";
 import {AppCanvas, appCanvas} from "./scripts/AppCanvas";
 import "./styles/index.css";
 

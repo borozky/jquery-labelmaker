@@ -26,7 +26,7 @@
                 W &nbsp;<input type="number" name="paper-width" step="0.1" min="0" value="29.7"/> 
                 H &nbsp;<input type="number" name="paper-height" step="0.1" min="0" value="21.5"/> 
                 units 
-                <select name="paper-unit">
+                <select name="paper-unit" value="cm">
                     <option value="cm">cm</option>
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -57,6 +57,18 @@
                     <img src="%PUBLIC_URL%/images/textbox.png" alt=""/>
                     <span>Textbox</span>
                 </li>
+                <li class="item-types" data-type="DATE">
+                    <img src="%PUBLIC_URL%/images/date.png" alt=""/>
+                    <span>Date</span>
+                </li>
+                <li class="item-types" data-type="BARCODE">
+                    <img src="%PUBLIC_URL%/images/barcode.png" alt=""/>
+                    <span>Barcode</span>
+                </li>
+                <li class="item-types" data-type="IMAGE">
+                    <img src="%PUBLIC_URL%/images/image.png" alt=""/>
+                    <span>Image</span>
+                </li>
                 <li class="item-types" data-type="RECTANGLE">
                     <img src="%PUBLIC_URL%/images/rectangle.png" alt=""/>
                     <span>Rectangle</span>
@@ -69,176 +81,129 @@
                     <img src="%PUBLIC_URL%/images/line.png" alt=""/>
                     <span>Line</span>
                 </li>
-                <li class="item-types" data-type="IMAGE">
-                    <img src="%PUBLIC_URL%/images/image.png" alt=""/>
-                    <span>Image</span>
-                </li>
-                <li class="item-types" data-type="BARCODE">
-                    <img src="%PUBLIC_URL%/images/barcode.png" alt=""/>
-                    <span>Barcode</span>
-                </li>
-                <li class="item-types" data-type="DATE">
-                    <img src="%PUBLIC_URL%/images/date.png" alt=""/>
-                    <span>Date</span>
-                </li>
             </ul>
         </div>
 
         <div class="right-sidebar" id="RightSidebar">
-            <div class="control-section" id="FontControls">
-                <h4 class="control-section-title">Text</h4>
-                <div class="control-section-body">
 
-                    <div class="row">
-                        <h4 class="row-title">Content</h4>
-                        <input type="text" name="content" value="text">
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Font</h4>
-                        <select name="font-family" id="FontFamily">
-                            <option value="Arial">Arial</option>
-                            <option value="Arial Black">Arial Black</option>
-                            <option value="Calibri">Calibri</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Palatino">Palatino</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Comic Sans">Comic Sans</option>
-                            <option value="Lucida Sans Console">Lucida Sans Console</option>
-                            <option value="Tahoma">Tahoma</option>
-                            <option value="Trebuchet MS">Trebuchet MS</option>
-                            <option value="Impact">Impact</option>
-                            <option value="Verdana">Verdana</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Lucida Console">Lucida Console</option>
-                            <option value="Segoe UI">Segoe UI</option>
-                        </select>
-    
-                        <input type="number" step="0.1" min="4" value="12" name="font-size"/> px <br/>
-
-                        <button title="Bold" id="FontBold" class="font-style" data-value="bold">
-                            <i class="fa fa-bold"></i>
-                        </button>
-                        <button title="italic" id="FontItalic" class="font-style" data-value="italic">
-                            <i class="fa fa-italic"></i>
-                        </button>
-                        <button title="underline" id="FontUnderline" class="font-style" data-value="underline">
-                            <i class="fa fa-underline"></i>
-                        </button>
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Alignment</h4>
-                        <button title="Align left" class="font-alignment active" data-value="left">
-                            <i class="fa fa-align-left"></i>
-                        </button>
-                        <button title="Align center" class="font-alignment" data-value="center">
-                            <i class="fa fa-align-center"></i>
-                        </button>
-                        <button title="Align right" class="font-alignment" data-value="right">
-                            <i class="fa fa-align-right"></i>
-                        </button>
-                        <button title="Justify text" class="font-alignment" data-value="justify">
-                            <i class="fa fa-align-justify"></i>
-                        </button>
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Color</h4>
-                        <input type="text" class="jscolor" name="color" value="#000000"/>
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Letter spacing and line height</h4>
-
-                        <i class="fa fa-arrows-h"></i>
-                        <input type="number" title="Letter spacing" name="letter-spacing" step="0.1" value="1"> px &nbsp; 
-
-                        <i class="fa fa-arrows-v"></i>
-                        <input type="number" title="Line height" name="line-height" step="0.1" value="1">
-                    </div>
-                    
-                </div>
+            <div class="control" id="ValueControl">
+                <span class="title">Content</span>
+                <input type="text" name="value">
             </div>
 
-            <div class="control-section" id="ShapeControls">
-                <h4 class="control-section-title">Rectangle</h4>
-                <div class="control-section-body">
-
-                    <div class="row">
-                        <h4 class="row-title">Dimensions</h4>
-                        W &nbsp;<input type="number" step="1" name="width" value="80"> px &nbsp;
-                        H &nbsp;<input type="number" step="1" name="height" value="80"> px &nbsp;
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Background</h4>
-                        <input type="text" class="jscolor" name="background-color" value="#fff" />
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Border</h4>
-                        <input type="number" step="1" value="2" min="0" name="border-width">
-                        &nbsp; <input type="text" class="jscolor" name="border-color" value="#000000">
-                    </div>
-
-                </div>
+            <div class="control" id="DatepickerControl">
+                <span class="title">Date</span>
+                <input type="text" name="date"><br/>
+                <select name="format" value="DD-MM-YYYY">
+                    <option value="DD-MM-YYYY">12-25-2017</option>
+                </select>
             </div>
 
-            <div class="control-section" id="ImageControls">
-                <h4 class="control-section-title">Image</h4>
-                <div class="control-section-body">
-                    <div class="row">
-                        <input type="file" name="image" accept="image/*">
-                    </div>
-                </div>
+            <div class="control" id="FontFamilyControl">
+                <span class="title">Font</span>
+                <select name="font-family" id="FontFamily">
+                    <option value="Arial">Arial</option>
+                    <option value="Arial Black">Arial Black</option>
+                    <option value="Calibri">Calibri</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Palatino">Palatino</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Comic Sans">Comic Sans</option>
+                    <option value="Lucida Sans Console">Lucida Sans Console</option>
+                    <option value="Tahoma">Tahoma</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Lucida Console">Lucida Console</option>
+                    <option value="Segoe UI">Segoe UI</option>
+                </select>
+                <input type="number" step="0.1" min="4" value="12" name="font-size"/> px 
             </div>
 
-            <div class="control-section" id="BarcodeControls">
-                <h4 class="control-section-title">Barcode</h4>
-                <div class="control-section-body">
-
-                    <div class="row">
-                        <h4 class="row-title">Value</h4>
-                        <input type="text" name="barcode-value" value="00000000" style="margin-bottom: 5px"><br/>
-                        <input type="checkbox" id="ShowBarcodeText" name="hide-text" value="true" checked="checked"/> &nbsp;
-                        <label for="ShowBarcodeText" style="font-weight: normal; vertical-align: top;">Show text</label>
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Line width &times line height</h4>
-                        <input type="number" name="line-width" step="0.1" value="2"> &nbsp; <input type="number" name="line-height" step="0.1" value="100"/> px
-                    </div>
-                </div>
+            <div class="control" id="FontStylingControl">
+                <button title="Bold" id="FontBold" class="font-style" data-prop="fontWeight" data-default="normal" data-active="bold">
+                    <i class="fa fa-bold"></i>
+                </button>
+                <button title="italic" id="FontItalic" class="font-style" data-prop="fontStyle" data-default="normal" data-active="italic">
+                    <i class="fa fa-italic"></i>
+                </button>
+                <button title="underline" id="FontUnderline" class="font-style" data-prop="textDecoration" data-default="none" data-active="underline">
+                    <i class="fa fa-underline"></i>
+                </button>
             </div>
 
-            <div class="control-section" id="LineControls">
-                <h4 class="control-section-title">Line</h4>
-                <div class="control-section-body">
-                    <div class="row">
-                        <h4 class="row-title">Thickness</h4>
-                        <input type="number" name="line-thickness" step="1" value="1">
-                    </div>
-
-                    <div class="row">
-                        <h4 class="row-title">Color</h4>
-                        <input type="text" class="jscolor" name="line-color" value="#0000000">
-                    </div>
-                </div>
+            <div class="control" id="FontAlignmentControl">
+                <span class="title">Alignment</span>
+                <button title="Align left" class="font-alignment active" data-value="left">
+                    <i class="fa fa-align-left"></i>
+                </button>
+                <button title="Align center" class="font-alignment" data-value="center">
+                    <i class="fa fa-align-center"></i>
+                </button>
+                <button title="Align right" class="font-alignment" data-value="right">
+                    <i class="fa fa-align-right"></i>
+                </button>
+                <button title="Justify text" class="font-alignment" data-value="justify">
+                    <i class="fa fa-align-justify"></i>
+                </button>
             </div>
 
-            <div class="control-section" id="ItemControls">
-                <div class="control-section-body">
-                    <div class="row">
-                        <button>
-                            <i class="fa fa-trash-o"></i> Remove
-                        </button>
-                    </div>
-                </div>
+            <div class="control" id="TextColorControl">
+                <span class="title">Color</span>
+                <input type="text" class="jscolor" name="color"/>
+            </div>
+
+            <div class="control" id="BackgroundColorControl">
+                <span class="title">Background</span>
+                <input type="text" class="jscolor" name="background-color"/>
+            </div>
+
+            <div class="control" id="SizeControl">
+                <span class="title">Size</span>
+                W &nbsp;<input type="number" step="1" name="width" value="80"> px &nbsp;
+                H &nbsp;<input type="number" step="1" name="height" value="80"> px &nbsp;
+            </div>
+
+            <div class="control" id="BorderControl">
+                <span class="title">Border</span>
+                <input type="number" step="1" value="2" min="0" name="border-width">
+                &nbsp; <input type="text" class="jscolor" name="border-color">
+            </div>
+
+            <div class="control" id="ImageControl">
+                <span class="title">Image</span>
+                <input type="file" name="image" accept="image/*">
+            </div>
+
+            <div class="control" id="BarcodeValueControl">
+                <span class="title">Barcode</span>
+                <input type="text" name="barcode-value" value="00000000" style="margin-bottom: 5px"><br/>
+                <input type="checkbox" id="ShowBarcodeText" name="display-value" value="true" checked="checked"/> &nbsp;
+                <label for="ShowBarcodeText" style="font-weight: normal; vertical-align: top;">Show text</label>
+            </div>
+
+            <div class="control" id="BarcodeLineControl">
+                <span class="title">Line width &amp; height</span>
+                <input type="number" name="line-width" step="0.1" value="2"> &nbsp; 
+                <input type="number" name="line-height" step="1" value="100"/> px
+            </div>
+
+            <div class="control" id="SpacingAndLineHeightControl">
+                <span class="title">Letter spacing and line height</span>
+                <input type="number" name="letter-spacing" id="LetterSpacing" step="0.1">
+                <input type="number" name="line-height" id="LineHeight" step="0.1">
+            </div>
+
+            <div class="control" id="ItemControl">
+                <button>
+                    <i class="fa fa-trash-o"></i> Remove
+                </button>
             </div>
         </div>
 
         <footer class="app-footer" id="AppFooter">
+            <span id="Coordinates"></span>
             Created by <a href="mailto: borozky@gmail.com">Joshua Orozco</a>
         </footer>
         

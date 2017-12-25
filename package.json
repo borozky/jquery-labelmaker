@@ -9,8 +9,10 @@
     "jquery-ui-bundle": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
     "jsbarcode": "^3.8.0",
+    "lodash": "^4.17.4",
     "moment": "^2.20.1",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
