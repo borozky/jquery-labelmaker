@@ -66,6 +66,13 @@ export function canvas(state = initialCanvasState, action = {}) {
                 ...state,
                 items: state.items.filter(item => item.id !== action.payload.id)
             }
+        case "UNSELECT_ALL_ITEMS":
+            return {
+                ...state,
+                items: state.items.map(item => ({
+                    ...item, selected: false
+                }))
+            }
         default:
             return state
     }

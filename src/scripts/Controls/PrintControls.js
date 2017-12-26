@@ -1,6 +1,8 @@
 import $ from "jquery";
 import {appCanvas} from "../AppCanvas";
+import {siteModal} from "../Sections/SiteModal";
 import store from "../store";
+import html2canvas from "html2canvas";
 
 export default class PrintControls {
     constructor() {
@@ -62,7 +64,31 @@ export default class PrintControls {
      * @param {MouseEvent} e 
      */
     previewClicked(e) {
-        alert("Preview is current not supported");
+        store.dispatch({ type: "UNSELECT_ALL_ITEMS" })
+
+        let {width, height, units} = store.getState().settings;
+
+        // open modal, hide other sections
+        let $previewParent = siteModal.openSection("#PreviewParent");
+        siteModal.$scrollable.css({
+            backgroundColor: "#CCCCCC",
+        })
+        
+        let $preview = $previewParent.find("canvas");
+        if ($preview.length > 0) {
+            $preview.remove();
+        }
+
+        html2canvas(appCanvas.$element[0]).then(function(canvas) {
+            let $generatedCanvas = $(canvas);
+            $generatedCanvas.css({ 
+                boxShadow: "0 0 0.5cm rgba(0,0,0,.5)"
+            });
+            $previewParent.append($generatedCanvas)
+        })
+
+
+        console.log(siteModal);
     }
 
     setSettings(settings) {

@@ -23,7 +23,7 @@ export default class DateControl {
 
         this.$formatHelpLink.on("click", function(e) {
             e.preventDefault();
-            siteModal.open();
+            siteModal.openSection("#FormatHelpSection");
         })
 
         store.subscribe(() => {

@@ -8,6 +8,8 @@ export default class SiteModal {
         this.$background = this.$element.find("#SiteModalBackground");
         this.$closeButton = this.$element.find("#CloseModal");
         this.$modalContent = this.$element.find("#ModalContent");
+        this.$foreground = this.$element.find("#Foreground");
+        this.$scrollable = this.$element.find("#ModalScrollableContent");
 
         this.$closeButton.on("click", e => {
             e.preventDefault();
@@ -21,6 +23,10 @@ export default class SiteModal {
     }
 
     close() {
+        this.$modalContent.find(".active").removeClass("active");
+        this.$scrollable.css({
+            backgroundColor: "transparent"
+        })
         this.$element.removeClass("open");
     }
 
@@ -29,13 +35,16 @@ export default class SiteModal {
     }
 
     /**
-     * @param {JQuery<HTMLElement>} $content 
+     * @param {string} selector
+     * @return {JQuery<HTMLElement>}
      */
-    setContent($content) {
-        this.$content = $content;
-        this.$modalContent.empty();
-        this.$modalContent.append($content);
+    openSection(selector) {
+        this.open();
+        let $found = this.$modalContent.find(selector);
+        $found.addClass("active").siblings().removeClass("active");
+        return $found;
     }
+
 }
 
 export let siteModal = new SiteModal();
