@@ -7,7 +7,7 @@ const initialCanvasState = {
 const initialSettingsState = {
     width: 4,
     height: 6,
-    units: "in"
+    units: "in",
 }
 
 export function canvas(state = initialCanvasState, action = {}) {
@@ -90,11 +90,18 @@ export function settings(state = initialSettingsState, action = {}) {
     }
 }
 
-let combinedReducers = combineReducers({
+let appReducer = combineReducers({
     canvas: canvas,
-    settings: settings
+    settings: settings,
+    build: () => 1
 });
 
+const rootReducer = (state, action) => {
+    if (action.type === "LOAD_NEW_STATE") {
+        state = action.payload
+    }
+    return appReducer(state, action);
+}
 
 const stateLogger = store => next => action => {
     let result;
@@ -106,4 +113,4 @@ const stateLogger = store => next => action => {
     return result;
 }
 
-export default createStore(combinedReducers, applyMiddleware(stateLogger));
+export default createStore(rootReducer, applyMiddleware(stateLogger));
