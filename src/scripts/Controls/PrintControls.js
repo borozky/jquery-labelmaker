@@ -1,65 +1,76 @@
 import $ from "jquery";
 import {appCanvas} from "../AppCanvas";
+import store from "../store";
 
 export default class PrintControls {
-    options = {
-        width: 21.5,
-        height: 29.7,
-        units: "cm",
-        onUpdate: function(newSettings) {},
-        onPreview: function(settings){}
-    }
-
-    constructor(options) {
+    constructor() {
         this.$element = $("#PrintControls");
-        this.options = {...this.options, ...options};
+        this.$paperWidth = this.$element.find("input[name='paper-width']");
+        this.$paperHeight = this.$element.find("input[name='paper-height']");
+        this.$paperUnit = this.$element.find("select[name='paper-unit']");
+        this.$previewButton = this.$element.find("button");
 
-        let $paperWidth = this.$element.find("input[name='paper-width']");
-        let $paperHeight = this.$element.find("input[name='paper-height']");
-        let $paperUnit = this.$element.find("select[name='paper-unit']");
-        let $previewButton = this.$element.find("button");
+        this.$paperWidth.on("input change paste keyup", this.paperWidthChanged.bind(this));
+        this.$paperHeight.on("input change paste keyup", this.paperHeightChanged.bind(this));
+        this.$paperUnit.on("change", this.paperUnitChanged.bind(this));
+        this.$previewButton.on("click", this.previewClicked.bind(this));
 
-        $paperWidth[0].value = Number(this.options.width)
-        $paperHeight[0].value = Number(this.options.height)
-        $paperUnit[0].value = Number(this.options.units)
+        store.subscribe(() => {
+            let settings = store.getState().settings;
+            this.setSettings(settings);
+        });
 
-        $paperWidth.on("input change paste keyup", e => {
-            this.options.width = Number(e.target.value)
-            this.options.onUpdate(this.options);
-        })
+    }
 
-        $paperHeight.on("input change paste keyup", e => {
-            this.options.height = Number(e.target.value)
-            this.options.onUpdate(this.options);
-        })
-
-        $paperUnit.on("change", e => {
-            this.options.units = e.target.value.toString()
-            this.options.onUpdate(this.options);
-        })
-
-        $previewButton.on("click", e => {
-            this.preview();
+    /**
+     * @param {JQuery.Event} e 
+     */
+    paperWidthChanged(e) {
+        store.dispatch({
+            type: "UPDATE_SETTINGS",
+            payload: {
+                width: Number(e.target.value)
+            }
         })
     }
 
-    setSize(width = this.options.width, height = this.options.height) {
-        this.options.width = width
-        this.options.height = height
-        this.options.onUpdate();
+    /**
+     * @param {JQuery.Event} e 
+     */
+    paperHeightChanged(e) {
+        store.dispatch({
+            type: "UPDATE_SETTINGS",
+            payload: {
+                height: Number(e.target.value)
+            }
+        })
     }
 
-    preview() {
-        this.options.onPreview(this.options);
+    /**
+     * @param {JQuery.Event} e 
+     */
+    paperUnitChanged(e) {
+        store.dispatch({
+            type: "UPDATE_SETTINGS",
+            payload: {
+                units: e.target.value
+            }
+        })
+    }
+
+    /**
+     * @param {MouseEvent} e 
+     */
+    previewClicked(e) {
+        alert("Preview is current not supported");
+    }
+
+    setSettings(settings) {
+        this.settings = settings;
+        this.$paperWidth.val(Number(this.settings.width));
+        this.$paperHeight.val(Number(this.settings.height));
+        this.$paperUnit.val(this.settings.units);
     }
 }
 
-export let printControls = new PrintControls({
-    onUpdate: function(newOptions) {
-        appCanvas.$element[0].style.width = `${newOptions.width}${newOptions.units}`
-        appCanvas.$element[0].style.height = `${newOptions.height}${newOptions.units}`
-    },
-    onPreview: function(settings) {
-        alert(JSON.stringify(settings));
-    }
-});
+export let printControls = new PrintControls();

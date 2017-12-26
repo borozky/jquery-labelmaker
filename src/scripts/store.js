@@ -5,9 +5,9 @@ const initialCanvasState = {
     items: []
 }
 const initialSettingsState = {
-    width: 21.5,
-    height: 29.7,
-    units: "cm"
+    width: 4,
+    height: 6,
+    units: "in"
 }
 
 export function canvas(state = initialCanvasState, action = {}) {
@@ -73,7 +73,7 @@ export function canvas(state = initialCanvasState, action = {}) {
 
 export function settings(state = initialSettingsState, action = {}) {
     switch(action.type) {
-        case "SETTINGS_UPDATED":
+        case "UPDATE_SETTINGS":
             return {
                 ...state,
                 ...action.payload

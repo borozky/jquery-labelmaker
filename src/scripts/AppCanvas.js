@@ -8,26 +8,10 @@ import JSBarcode from "jsbarcode";
 import moment from "moment";
 
 export class AppCanvas {
-    selected = []
-    items = []
 
-    options = {
-        width: 1024,
-        height: 1024,
-        onItemAdded: function(item) {},
-        onResize: function() {},
-        onItemSelected: function(item){},
-        onMultipleItemsSelected: function(items){},
-        onItemMoved: function(item, offsetX, offsetY) {},
-        onMultipleItemsMoved: function(items, offsetX, offsetY) {},
-        onItemRemoved: function(item) {},
-        onMultipleItemsRemoved: function(items) {}
-    }
-
-    constructor($element = $("#AppCanvas"), options = {}) {
+    constructor() {
         let self = this;
-        self.$element = $element;
-        self.options = {...self.options, ...options};
+        self.$element = $("#AppCanvas");
 
         self.$element.selectable({
             stop: function(event, ui) {
@@ -69,6 +53,12 @@ export class AppCanvas {
         });
 
         store.subscribe(() => {
+
+            // set size
+            let settings = store.getState().settings;
+            this.resize(settings.width, settings.height, settings.units);
+
+
             let items = store.getState().canvas.items;
 
             // remove an item based on existing IDs
@@ -95,9 +85,6 @@ export class AppCanvas {
                 }
             });
         });
-
-
-
     }
 
     addItem(item = {}) {
@@ -259,20 +246,14 @@ export class AppCanvas {
         }
     }
 
+    resize(width = 21.0, height = 29.7, units = "cm") {
+        this.$element.css({
+            width: `${width}${units}`,
+            height: `${height}${units}`
+        })
+    }
+
 }
 
 
-export let appCanvas = new AppCanvas($("#AppCanvas"), {
-    onItemSelected: function(item) {
-
-    },
-    onMultipleItemsSelected: function(items) {
-
-    },
-    onItemRemoved: function() {
-
-    },
-    onMultipleItemsRemoved: function() {
-
-    }
-});
+export let appCanvas = new AppCanvas();
