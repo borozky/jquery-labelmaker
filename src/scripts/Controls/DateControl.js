@@ -28,7 +28,7 @@ export default class DateControl {
 
         store.subscribe(() => {
             let selectedItems = store.getState().canvas.items.filter(item => item.selected);
-            if (selectedItems.length === 1) {
+            if (selectedItems.length === 1 && selectedItems[0].type === "DATE") {
                 this.setItem(selectedItems[0]);
             }
         });
