@@ -48,7 +48,6 @@ export default class FileControls {
             e.stopImmediatePropagation();
 
             if (e.target.files.length == 0) {
-                alert("Error: You must select a file");
                 return;
             }
 
