@@ -1,4 +1,9 @@
+#SiteModal {
+    display: none;
+}
+
 #SiteModal.open {
+    display: block;
     position: fixed;
     height: 100%;
     width: 100%;
