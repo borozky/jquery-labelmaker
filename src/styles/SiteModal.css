@@ -1,0 +1,91 @@
+#SiteModal.open {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#SiteModal.open #SiteModalBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+}
+
+#SiteModal.open #SiteModalForeground {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background-color: #fff;
+    max-width: 1024px;
+    display: inline-block;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+#SiteModal.open #ModalHeader {
+    margin-top: -40px;
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+
+#SiteModal.open #ModalHeader button {
+    padding: 4px 24px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+#SiteModal.open #ModalScrollableContent {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#SiteModal.open #ModalContent {
+    padding: 15px;
+}
+
+#SiteModal.open .help-section {
+    color: black;
+    font-size: 12px;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+#SiteModal.open .help-section a {
+    color: #0066cc;
+}
+
+#SiteModal.open .help-section a:hover {
+    text-decoration: none;
+}
+
+#SiteModal.open .help-section h4 {
+    font-size: 12pt;
+    font-weight: normal;
+    color: #003399;
+    margin: 15px 0px 0px 0px;
+}
+
+#SiteModal.open .help-section table {
+    width: 100%;
+    text-align: left;
+}
+
+#SiteModal.open .help-section table th {
+    padding: 5px 0;
+}
+
+#SiteModal.open .help-section table tr td {
+    padding: 2px 0;
+}

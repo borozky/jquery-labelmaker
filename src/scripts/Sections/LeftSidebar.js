@@ -38,7 +38,7 @@ export let leftSidebar = new LeftSidebar($("#LeftSidebar"), {
             value: null,
             color: "#000000",
             fontSize: 20,
-            fontFamily: "Segoe UI",
+            fontFamily: "Arial",
             textAlign: "left",
             fontWeight: "normal",
             fontStyle: "normal",
@@ -75,7 +75,7 @@ export let leftSidebar = new LeftSidebar($("#LeftSidebar"), {
                     payload: {
                         ...item,
                         value: (new Date()).toLocaleString(),
-                        format: "DD-MM-YYYY"
+                        format: "DD-MM-YYYY hh:mm:ss a"
                     }
                 })
                 break;
