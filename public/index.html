@@ -26,7 +26,7 @@
                 W &nbsp;<input type="number" name="paper-width" step="0.1" min="0" value="4"/> 
                 H &nbsp;<input type="number" name="paper-height" step="0.1" min="0" value="6"/> 
                 units 
-                <select name="paper-unit" value="cm">
+                <select name="paper-unit" value="in">
                     <option value="cm">cm</option>
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -223,8 +223,9 @@
         </footer>
         
         <div class="working-area" id="WorkingArea">
-            <div id="CanvasRuler"></div>
-            <div id="AppCanvas"></div>
+            <div id="CanvasRuler">
+                <div id="AppCanvas"></div>
+            </div>
         </div>
         <div id="SiteModal">
             <div id="SiteModalBackground"></div>
