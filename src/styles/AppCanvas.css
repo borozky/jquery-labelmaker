@@ -32,38 +32,38 @@
     padding-bottom: 400px;
 }
 
-
-
 #AppCanvas .canvas-item {
     display: inline-block;
     position: absolute !important;
 }
+
+#AppCanvas .canvas-item:hover, #AppCanvas .canvas-item.ui-selecting {
+    outline: 1px dotted #d2d2d2;
+}
+
 #AppCanvas .canvas-item .ui-icon {
     visibility: hidden;
 }
 
-#AppCanvas .canvas-item:hover .ui-icon {
+#AppCanvas .canvas-item:hover .ui-icon, #AppCanvas .canvas-item.ui-selecting .ui-icon {
     visibility: visible;
+}
+
+#AppCanvas .canvas-item.ui-selected {
+    outline: 1px dashed black;
 }
 
 #AppCanvas .canvas-item.ui-selected .ui-icon {
     visibility: visible;
 }
-#AppCanvas .canvas-item:hover {
-    outline: 1px dotted #d2d2d2;
-}
-#AppCanvas .canvas-item.text,
-#AppCanvas .canvas-item.textbox,
-#AppCanvas .canvas-item.date {
+
+#AppCanvas .canvas-item.text, #AppCanvas .canvas-item.textbox, #AppCanvas .canvas-item.date {
     min-width: 5px;
     min-height: 5px;
 }
 
 #AppCanvas .canvas-item.ellipse {
     border-radius: 100%;
-}
-#AppCanvas .canvas-item.ui-selected {
-    outline: 1px dashed black;
 }
 
 #AppCanvas .canvas-item.image img {
@@ -72,10 +72,12 @@
     display: inline-block;
 }
 
-#AppCanvas .canvas-item.barcode img,
-#AppCanvas .canvas-item.barcode svg {
+#AppCanvas .canvas-item.barcode img, #AppCanvas .canvas-item.barcode svg {
     display: block;
     width: 100%;
     height: 100%;
 }
 
+.ui-selectable-helper {
+    z-index: 9999;
+}
