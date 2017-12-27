@@ -196,6 +196,20 @@
                 <input type="number" name="line-height" id="LineHeight" step="0.1">
             </div>
 
+            <div class="control" id="LineControl">
+                <span class="title">Length</span>
+                <input type="number" name="length" step="1" min="0">
+                <span class="title">Thickness</span>
+                <input type="number" name="thickness" step="1" min="1" value="2" ><br/><br/>
+                <span class="title">Orientation</span>
+                <input type="radio" name="orientation" id="Horizontal" value="horizontal" checked="checked"/>
+                <label for="Horizontal">Horizontal</label><br/>
+                <input type="radio" name="orientation" id="Vertical" value="vertical" />
+                <label for="Vertical">Vertical</label>
+                <span class="title">Line color</span>
+                <input type="text" name="line-color" value="#000000" class="jscolor">
+            </div>
+
             <div class="control" id="ItemControl">
                 <button>
                     <i class="fa fa-trash-o"></i> Remove

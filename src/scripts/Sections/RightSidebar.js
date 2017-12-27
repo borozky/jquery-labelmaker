@@ -15,6 +15,7 @@ import {imageControl} from "../Controls/ImageControl"
 import {barcodeValueControl} from "../Controls/BarcodeValueControl";
 import {barcodeLineControl} from "../Controls/BarcodeLineControl";
 import {spacingAndLineHeightControl} from "../Controls/SpacingAndLineHeightControl";
+import { lineControls } from "../Controls/LineControl";
 
 
 export default class RightSidebar {
@@ -89,6 +90,7 @@ export default class RightSidebar {
                 borderControl.$element.show();
                 break;
             case "LINE":
+                lineControls.$element.show();
                 break;
             default:
                 return;

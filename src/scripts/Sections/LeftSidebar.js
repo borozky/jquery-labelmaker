@@ -122,6 +122,18 @@ export let leftSidebar = new LeftSidebar($("#LeftSidebar"), {
                     }
                 });
                 break;
+            case "LINE":
+                store.dispatch({
+                    type: "ADD_CANVAS_ITEM",
+                    payload: {
+                        ...item,
+                        width: 300,
+                        height: 2,
+                        orientation: "horizontal",
+                        backgroundColor: "#000000",
+                    }
+                });
+                break;
             default:
                 alert("Adding new " + itemType + " is currently not supported");
                 return;
