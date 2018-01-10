@@ -1,7 +1,7 @@
 #LeftSidebar {
     left: 0px;
     top: 30px;
-    width: 60px;
+    width: 200px;
     bottom: 16px;
     cursor: default;
     background: #fff;
@@ -13,6 +13,7 @@
 #LeftSidebar ul {
     padding: 0 2px;
     margin: 0;
+    list-style: none;
 }
 
 #LeftSidebar .item-types {
@@ -20,6 +21,9 @@
     text-align: center;
     padding: 2px;
     border: 1px solid transparent;
+    max-width: 55px;
+    display: inline-block;
+
 }
 
 #LeftSidebar .item-types:hover {
@@ -36,4 +40,24 @@
     display: inline-block;
     width: 100%;
     margin-top: 4px;
+}
+
+#LeftSidebar #ItemNavigation {
+    border-top: 1px solid #d2d2d2;
+    margin-top: 15px;
+    padding-left: 0;
+    padding-right: 0;
+}
+#LeftSidebar #ItemNavigation li {
+    padding: 2px 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+#LeftSidebar #ItemNavigation li:hover {
+    background-color: #ebf5fd;
+}
+#LeftSidebar #ItemNavigation li.selected {
+    background-color: #d2e4f3;
 }

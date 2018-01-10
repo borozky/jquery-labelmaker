@@ -7,6 +7,7 @@ import Image from "../ItemTypes/Image";
 import store from "../store";
 import defaultImage from "../../images/image.png";
 import moment from "moment";
+import {itemNavigation} from "./ItemNavigation";
 
 export default class LeftSidebar {
     options = {
@@ -21,7 +22,17 @@ export default class LeftSidebar {
         this.$element.find(".item-types").on("click", function(e) {
             let itemType = $(this).attr("data-type").toString();
             self.options.onCreate(itemType);
-        })
+        });
+
+        // when left sidebar is clicked (except its li and inner items)
+        this.$element.on("click", function(e) {
+            let $target = $(e.target);
+            if ($target.attr("id") === "LeftSidebar" || $target[0].tagName.toLowerCase() === "ul") {
+                store.dispatch({
+                    type: "UNSELECT_ALL_ITEMS"
+                });
+            }
+        });
     }
 }
 

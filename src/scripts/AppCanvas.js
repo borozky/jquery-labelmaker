@@ -97,6 +97,7 @@ export class AppCanvas {
         $element.addClass(item.type.toString().toLowerCase());
         $element.attr("data-type", item.type);
         $element.attr("id", item.id.toString());
+        $element.attr("title", item.id.toString());
         $element.css({...item});
 
         // DOM
