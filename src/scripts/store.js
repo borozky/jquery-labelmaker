@@ -112,8 +112,12 @@ export function canvas(state = initialCanvasState, action = {}) {
             items = state.items.map(item => ({
                 ...item, selected: false
             }));
-
-        default: return state; // eslint-disable-line
+            break
+        case "REMOVE_ALL_ITEMS":
+            items = []
+            break;
+        default: 
+            return state; // eslint-disable-line
     }
 
     return {
@@ -141,7 +145,7 @@ let appReducer = combineReducers({
     build: () => 2
 });
 
-const rootReducer = (state, action) => {
+export const rootReducer = (state, action) => {
     if (action.type === "LOAD_NEW_STATE") {
         state = {
             ...action.payload,
@@ -156,11 +160,16 @@ const rootReducer = (state, action) => {
 
 const stateLogger = store => next => action => {
     let result;
-    console.groupCollapsed(`DISPATCHING ${action.type}`);
-    console.log("State BEFORE ACTION", store.getState());
-    result = next(action);
-    console.log("State AFTER ACTION", store.getState());
-    console.groupEnd();
+    if (process.env.NODE_ENV === "development") {
+        console.groupCollapsed(`DISPATCHING ${action.type}`);
+        console.log("State BEFORE ACTION", store.getState());
+        result = next(action);
+        console.log("State AFTER ACTION", store.getState());
+        console.groupEnd();
+    } 
+    else {
+        result = next(action);
+    }
     return result;
 }
 
