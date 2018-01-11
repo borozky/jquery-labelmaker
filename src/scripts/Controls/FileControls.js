@@ -2,14 +2,16 @@ import $ from "jquery"
 import moment from "moment"
 import FileSaver from "file-saver"
 import {siteModal} from "../Sections/SiteModal"
-import store from "../store"
+import store from "../store";
+import {HTMLGenerator} from '../generators';
+import html2canvas from 'html2canvas';
 
 export default class FileControls {
     constructor() {
         this.$element = $("#FileControls")
         this.$save = this.$element.find("#SaveFile")
         this.$fileInput = this.$element.find("#FileChooser");
-        this.$open = this.$element.find("#OpenFile")
+        this.$open = this.$element.find("#OpenFile");
 
         this.$save.on("click", this.saveFilePrompt.bind(this));
         this.$open.on("click", this.openFile.bind(this));
@@ -94,7 +96,6 @@ export default class FileControls {
             
         })
     }
-
 }
 
 export let fileControls = new FileControls();

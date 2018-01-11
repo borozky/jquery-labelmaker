@@ -16,6 +16,7 @@ import {barcodeValueControl} from "../Controls/BarcodeValueControl";
 import {barcodeLineControl} from "../Controls/BarcodeLineControl";
 import {spacingAndLineHeightControl} from "../Controls/SpacingAndLineHeightControl";
 import { lineControls } from "../Controls/LineControl";
+import {placeholderControls} from "../Controls/PlaceholderControls";
 
 
 export default class RightSidebar {

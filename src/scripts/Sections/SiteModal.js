@@ -1,5 +1,4 @@
 import $ from "jquery";
-import "../../styles/SiteModal.css";
 
 export default class SiteModal {
     constructor() {

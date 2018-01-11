@@ -55,10 +55,11 @@
     bottom: 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    background-color: #ccc;
 }
 
 #SiteModal.open #ModalContent {
-    padding: 15px;
+    height: 100%;
 }
 
 #SiteModal.open #ModalContent > div {

@@ -196,6 +196,12 @@ export class AppCanvas {
                 })
             },
         })
+        
+        if (item.selected) {
+            $element.addClass("ui-selected");
+        } else {
+            $element.removeClass("ui-selected");
+        }
 
         $element.data("labelmaker", item);
     }

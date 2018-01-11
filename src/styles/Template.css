@@ -1,0 +1,65 @@
+#HTMLGenerator {
+    height: calc(100% - 20px);
+    width: 100%;
+    display: table !important;
+    background-color: #fff;
+    padding-top: 20px;
+    cursor: default
+}
+
+#TemplateControls {
+    display: table-cell;
+    vertical-align: top;
+    width: 200px;
+    padding: 20px 5px;
+}
+
+
+#TemplatePreview {
+    display: table-cell;
+}
+
+
+#HTMLGenerator .canvas-parent {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 0 0.5cm rgba(0,0,0,.5);
+    box-shadow: 0 0 0.5cm rgba(0,0,0,.5);
+    position: relative;
+}
+
+#HTMLGenerator .canvas-parent .canvas-item {
+    display: inline-block;
+    position: absolute !important;
+}
+
+
+#HTMLGenerator .canvas-parent .canvas-item.text, #HTMLGenerator .canvas-parent .canvas-item.textbox, #HTMLGenerator .canvas-parent .canvas-item.date {
+    min-width: 5px;
+    min-height: 5px;
+}
+
+#HTMLGenerator .canvas-parent .canvas-item.ellipse {
+    border-radius: 100%;
+}
+
+#HTMLGenerator .canvas-parent .canvas-item.image img {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+#HTMLGenerator .canvas-parent .canvas-item.barcode img, #HTMLGenerator .canvas-parent .canvas-item.barcode svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#TemplatePreview {
+    position: relative;
+}
+
+#TemplatePreviewCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

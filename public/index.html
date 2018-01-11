@@ -14,7 +14,26 @@
             body {visibility: hidden;} 
             body.loaded { visibility: visible; }
         </style>
-        
+        <script>
+            function displayTabSection($element) {
+
+                // add active class to buttons
+                var $tabButtons = document.querySelectorAll("#RightSidebar .tabs button.active")
+                for(var i = 0; i < $tabButtons.length; i++) {
+                    $tabButtons[i].className = "";
+                }
+                $element.className = "active";
+
+                // toggle target
+                var target = $element.getAttribute("data-target");
+                var $activeItems = document.querySelectorAll("#RightSidebar .tab-content.active");
+                for(var i = 0; i < $activeItems.length; i++) {
+                    $activeItems[i].className = "tab-content";
+                }
+                var section = document.querySelector(target);
+                section.className = "tab-content active";
+            }
+        </script>
     </head>
     <body>
         <noscript>
@@ -44,6 +63,11 @@
                 <input type="file" id="FileChooser" accept=".json" style="display: none"/>
                 <button id="OpenFile">
                     <i class="fa fa-file-o"></i> &nbsp; Open
+                </button>
+            </div>
+            <div class="control-section" id="TemplateControls">
+                <button id="PreviewTemplate" type="button" disabled="disabled" title="There are no placeholders detected">
+                    Preview Template
                 </button>
             </div>
         </header>
@@ -88,135 +112,141 @@
         
 
         <div class="right-sidebar" id="RightSidebar">
-
-            <div class="control" id="ValueControl">
-                <span class="title">Content</span>
-                <input type="text" name="value">
+            <div class="tabs clearfix">
+                <button type="button" class="active" data-target="#GeneralControls" onmousedown="displayTabSection(this)">General</button>
+                <button type="button" data-target="#PlaceholderControls" onmousedown="displayTabSection(this)">Placeholders</button>
             </div>
-
-            <div class="control" id="DatepickerControl">
-                <span class="title">Date</span>
-                <input type="text" name="date"><br/>
-                <span class="title">Format &nbsp;</span>
-                <input type="text" name="format" value="DD-MM-YYYY"><br/>
-                <a href="#" id="FormatHelpLink">Help</a>
+            <div class="tab-content active" id="GeneralControls">
+                <div class="control" id="ValueControl">
+                    <span class="title">Content</span>
+                    <input type="text" name="value">
+                </div>
+    
+                <div class="control" id="DatepickerControl">
+                    <span class="title">Date</span>
+                    <input type="text" name="date"><br/>
+                    <span class="title">Format &nbsp;</span>
+                    <input type="text" name="format" value="DD-MM-YYYY"><br/>
+                    <a href="#" id="FormatHelpLink">Help</a>
+                </div>
+    
+                <div class="control" id="FontFamilyControl">
+                    <span class="title">Font</span>
+                    <select name="font-family" id="FontFamily">
+                        <option value="Arial">Arial</option>
+                        <option value="Arial Black">Arial Black</option>
+                        <option value="Calibri">Calibri</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Palatino">Palatino</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Comic Sans">Comic Sans</option>
+                        <option value="Lucida Sans Console">Lucida Sans Console</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Lucida Console">Lucida Console</option>
+                        <option value="Segoe UI">Segoe UI</option>
+                    </select>
+                    <input type="number" step="0.1" min="4" value="12" name="font-size"/> px 
+                </div>
+    
+                <div class="control" id="FontStylingControl">
+                    <button title="Bold" id="FontBold" class="font-style" data-prop="fontWeight" data-default="normal" data-active="bold">
+                        <i class="fa fa-bold"></i>
+                    </button>
+                    <button title="italic" id="FontItalic" class="font-style" data-prop="fontStyle" data-default="normal" data-active="italic">
+                        <i class="fa fa-italic"></i>
+                    </button>
+                    <button title="underline" id="FontUnderline" class="font-style" data-prop="textDecoration" data-default="none" data-active="underline">
+                        <i class="fa fa-underline"></i>
+                    </button>
+                </div>
+    
+                <div class="control" id="FontAlignmentControl">
+                    <span class="title">Alignment</span>
+                    <button title="Align left" class="font-alignment active" data-value="left">
+                        <i class="fa fa-align-left"></i>
+                    </button>
+                    <button title="Align center" class="font-alignment" data-value="center">
+                        <i class="fa fa-align-center"></i>
+                    </button>
+                    <button title="Align right" class="font-alignment" data-value="right">
+                        <i class="fa fa-align-right"></i>
+                    </button>
+                    <button title="Justify text" class="font-alignment" data-value="justify">
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                </div>
+    
+                <div class="control" id="TextColorControl">
+                    <span class="title">Color</span>
+                    <input type="text" class="jscolor" name="color"/>
+                </div>
+    
+                <div class="control" id="BackgroundColorControl">
+                    <span class="title">Background</span>
+                    <input type="text" class="jscolor" name="background-color"/>
+                </div>
+    
+                <div class="control" id="SizeControl">
+                    <span class="title">Size</span>
+                    W &nbsp;<input type="number" step="1" name="width" value="80"> px &nbsp;
+                    H &nbsp;<input type="number" step="1" name="height" value="80"> px &nbsp;
+                </div>
+    
+                <div class="control" id="BorderControl">
+                    <span class="title">Border</span>
+                    <input type="number" step="1" value="2" min="0" name="border-width">
+                    &nbsp; <input type="text" class="jscolor" name="border-color">
+                </div>
+    
+                <div class="control" id="ImageControl">
+                    <span class="title">Image</span>
+                    <input type="file" name="image" accept="image/*">
+                </div>
+    
+                <div class="control" id="BarcodeValueControl">
+                    <span class="title">Barcode</span>
+                    <input type="text" name="barcode-value" value="00000000" style="margin-bottom: 5px"><br/>
+                    <input type="checkbox" id="ShowBarcodeText" name="display-value" value="true" checked="checked"/> &nbsp;
+                    <label for="ShowBarcodeText" style="font-weight: normal; vertical-align: top;">Show text</label>
+                </div>
+    
+                <div class="control" id="BarcodeLineControl">
+                    <span class="title">Line width &amp; height</span>
+                    <input type="number" name="line-width" step="0.1" value="2"> &nbsp; 
+                    <input type="number" name="line-height" step="1" value="100"/> px
+                </div>
+    
+                <div class="control" id="SpacingAndLineHeightControl">
+                    <span class="title">Letter spacing and line height</span>
+                    <input type="number" name="letter-spacing" id="LetterSpacing" step="0.1">
+                    <input type="number" name="line-height" id="LineHeight" step="0.1">
+                </div>
+    
+                <div class="control" id="LineControl">
+                    <span class="title">Length</span>
+                    <input type="number" name="length" step="1" min="0">
+                    <span class="title">Thickness</span>
+                    <input type="number" name="thickness" step="1" min="1" value="2" ><br/><br/>
+                    <span class="title">Orientation</span>
+                    <input type="radio" name="orientation" id="Horizontal" value="horizontal" checked="checked"/>
+                    <label for="Horizontal">Horizontal</label><br/>
+                    <input type="radio" name="orientation" id="Vertical" value="vertical" />
+                    <label for="Vertical">Vertical</label>
+                    <span class="title">Line color</span>
+                    <input type="text" name="line-color" value="#000000" class="jscolor">
+                </div>
+    
+                <div class="control" id="ItemControl">
+                    <button>
+                        <i class="fa fa-trash-o"></i> Remove
+                    </button>
+                </div>
             </div>
-
-            <div class="control" id="FontFamilyControl">
-                <span class="title">Font</span>
-                <select name="font-family" id="FontFamily">
-                    <option value="Arial">Arial</option>
-                    <option value="Arial Black">Arial Black</option>
-                    <option value="Calibri">Calibri</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Palatino">Palatino</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Comic Sans">Comic Sans</option>
-                    <option value="Lucida Sans Console">Lucida Sans Console</option>
-                    <option value="Tahoma">Tahoma</option>
-                    <option value="Trebuchet MS">Trebuchet MS</option>
-                    <option value="Impact">Impact</option>
-                    <option value="Verdana">Verdana</option>
-                    <option value="Courier New">Courier New</option>
-                    <option value="Lucida Console">Lucida Console</option>
-                    <option value="Segoe UI">Segoe UI</option>
-                </select>
-                <input type="number" step="0.1" min="4" value="12" name="font-size"/> px 
-            </div>
-
-            <div class="control" id="FontStylingControl">
-                <button title="Bold" id="FontBold" class="font-style" data-prop="fontWeight" data-default="normal" data-active="bold">
-                    <i class="fa fa-bold"></i>
-                </button>
-                <button title="italic" id="FontItalic" class="font-style" data-prop="fontStyle" data-default="normal" data-active="italic">
-                    <i class="fa fa-italic"></i>
-                </button>
-                <button title="underline" id="FontUnderline" class="font-style" data-prop="textDecoration" data-default="none" data-active="underline">
-                    <i class="fa fa-underline"></i>
-                </button>
-            </div>
-
-            <div class="control" id="FontAlignmentControl">
-                <span class="title">Alignment</span>
-                <button title="Align left" class="font-alignment active" data-value="left">
-                    <i class="fa fa-align-left"></i>
-                </button>
-                <button title="Align center" class="font-alignment" data-value="center">
-                    <i class="fa fa-align-center"></i>
-                </button>
-                <button title="Align right" class="font-alignment" data-value="right">
-                    <i class="fa fa-align-right"></i>
-                </button>
-                <button title="Justify text" class="font-alignment" data-value="justify">
-                    <i class="fa fa-align-justify"></i>
-                </button>
-            </div>
-
-            <div class="control" id="TextColorControl">
-                <span class="title">Color</span>
-                <input type="text" class="jscolor" name="color"/>
-            </div>
-
-            <div class="control" id="BackgroundColorControl">
-                <span class="title">Background</span>
-                <input type="text" class="jscolor" name="background-color"/>
-            </div>
-
-            <div class="control" id="SizeControl">
-                <span class="title">Size</span>
-                W &nbsp;<input type="number" step="1" name="width" value="80"> px &nbsp;
-                H &nbsp;<input type="number" step="1" name="height" value="80"> px &nbsp;
-            </div>
-
-            <div class="control" id="BorderControl">
-                <span class="title">Border</span>
-                <input type="number" step="1" value="2" min="0" name="border-width">
-                &nbsp; <input type="text" class="jscolor" name="border-color">
-            </div>
-
-            <div class="control" id="ImageControl">
-                <span class="title">Image</span>
-                <input type="file" name="image" accept="image/*">
-            </div>
-
-            <div class="control" id="BarcodeValueControl">
-                <span class="title">Barcode</span>
-                <input type="text" name="barcode-value" value="00000000" style="margin-bottom: 5px"><br/>
-                <input type="checkbox" id="ShowBarcodeText" name="display-value" value="true" checked="checked"/> &nbsp;
-                <label for="ShowBarcodeText" style="font-weight: normal; vertical-align: top;">Show text</label>
-            </div>
-
-            <div class="control" id="BarcodeLineControl">
-                <span class="title">Line width &amp; height</span>
-                <input type="number" name="line-width" step="0.1" value="2"> &nbsp; 
-                <input type="number" name="line-height" step="1" value="100"/> px
-            </div>
-
-            <div class="control" id="SpacingAndLineHeightControl">
-                <span class="title">Letter spacing and line height</span>
-                <input type="number" name="letter-spacing" id="LetterSpacing" step="0.1">
-                <input type="number" name="line-height" id="LineHeight" step="0.1">
-            </div>
-
-            <div class="control" id="LineControl">
-                <span class="title">Length</span>
-                <input type="number" name="length" step="1" min="0">
-                <span class="title">Thickness</span>
-                <input type="number" name="thickness" step="1" min="1" value="2" ><br/><br/>
-                <span class="title">Orientation</span>
-                <input type="radio" name="orientation" id="Horizontal" value="horizontal" checked="checked"/>
-                <label for="Horizontal">Horizontal</label><br/>
-                <input type="radio" name="orientation" id="Vertical" value="vertical" />
-                <label for="Vertical">Vertical</label>
-                <span class="title">Line color</span>
-                <input type="text" name="line-color" value="#000000" class="jscolor">
-            </div>
-
-            <div class="control" id="ItemControl">
-                <button>
-                    <i class="fa fa-trash-o"></i> Remove
-                </button>
-            </div>
+            <div class="tab-content" id="PlaceholderControls"></div>
         </div>
 
         <footer class="app-footer" id="AppFooter">
@@ -420,6 +450,13 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div id="HTMLGenerator">
+                            <div id="TemplateControls"></div>
+                            <div id="TemplatePreview">
+                                <div id="TemplatePreviewHTML"></div>
+                                <div id="TemplatePreviewCanvas"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

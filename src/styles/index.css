@@ -1,16 +1,10 @@
+@import "./common.css";
 @import "./AppHeader.css";
 @import "./LeftSidebar.css";
 @import "./RightSidebar.css";
 @import "./AppFooter.css";
 @import "./AppCanvas.css";
 @import "./ruler.css";
+@import "./SiteModal.css";
+@import "./Template.css";
 
-html, body {
-    height: 100%;
-}
-
-body {
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-    margin: 0px;
-    font-size: 12px;
-}
