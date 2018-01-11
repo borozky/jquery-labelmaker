@@ -3,12 +3,15 @@ import 'jquery-ui-bundle';
 import store from '../scripts/store';
 import JSBarcode from 'jsbarcode';
 import moment from 'moment';
+import Mousetrap from 'mousetrap';
 
 export class AppCanvas {
 
     constructor() {
         let self = this;
         self.$element = $("#AppCanvas");
+
+        self.setupKeyboardEvents();
 
         // .canvas-item is dynamically created item. Use delegates
         self.$element.on("click", ".canvas-item", function(e) {
@@ -379,6 +382,77 @@ export class AppCanvas {
         } 
 
         $element.resizable("option", "handles", item.orientation === "vertical" ? "n, s" : "e, w")
+    }
+
+
+    setupKeyboardEvents() {
+
+        Mousetrap.bind("up", function() {
+            if (document.activeElement === document.body) {
+                let selectedItems = store.getState().canvas.items.filter(item => item.selected);
+                if (selectedItems.length === 1) {
+                    store.dispatch({
+                        type: "UPDATE_CANVAS_ITEM",
+                        payload: {
+                            id: selectedItems[0].id,
+                            top: selectedItems[0].top - 1
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+
+        Mousetrap.bind("down", function() {
+            if (document.activeElement === document.body) {
+                let selectedItems = store.getState().canvas.items.filter(item => item.selected);
+                if (selectedItems.length === 1) {
+                    store.dispatch({
+                        type: "UPDATE_CANVAS_ITEM",
+                        payload: {
+                            id: selectedItems[0].id,
+                            top: selectedItems[0].top + 1
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+
+        Mousetrap.bind("left", function() {
+            if (document.activeElement === document.body) {
+                let selectedItems = store.getState().canvas.items.filter(item => item.selected);
+                if (selectedItems.length === 1) {
+                    store.dispatch({
+                        type: "UPDATE_CANVAS_ITEM",
+                        payload: {
+                            id: selectedItems[0].id,
+                            left: selectedItems[0].left - 1
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+
+        Mousetrap.bind("right", function() {
+            if (document.activeElement === document.body) {
+                let selectedItems = store.getState().canvas.items.filter(item => item.selected);
+                if (selectedItems.length === 1) {
+                    store.dispatch({
+                        type: "UPDATE_CANVAS_ITEM",
+                        payload: {
+                            id: selectedItems[0].id,
+                            left: selectedItems[0].left + 1
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+
+        
+
     }
 
 }
