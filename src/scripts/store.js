@@ -140,12 +140,18 @@ export function settings(state = initialSettingsState, action = {}) {
 let appReducer = combineReducers({
     canvas: canvas,
     settings: settings,
-    build: () => 1
+    build: () => 2
 });
 
 const rootReducer = (state, action) => {
     if (action.type === "LOAD_NEW_STATE") {
-        state = action.payload
+        state = {
+            ...action.payload,
+            canvas: {
+                ...action.payload.canvas,
+                placeholders: action.payload.canvas.placeholders ? action.payload.canvas.placeholders : []
+            }
+        }
     }
     return appReducer(state, action);
 }
