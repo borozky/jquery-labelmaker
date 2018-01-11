@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import store from '../store';
 import defaultImage from '../../images/image.png';
+import {itemNavigation} from './ItemNavigation';
+
 
 export default class LeftSidebar {
     options = {
@@ -9,6 +11,7 @@ export default class LeftSidebar {
 
     constructor($element = $("#LeftSidebar"), options = {onCreate:function(itemType){} }) {
         this.$element = $element;
+        this.itemNavigation = itemNavigation;
         this.options = {...this.options, ...options};
 
         let self = this;
