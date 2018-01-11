@@ -2,9 +2,11 @@ import $ from 'jquery';
 import moment from 'moment';
 import FileSaver from 'file-saver';
 import store from '../store';
+import Mousetrap from 'mousetrap';
 
 export default class FileControls {
     constructor() {
+        let self = this;
         this.$element = $("#FileControls");
         this.$save = this.$element.find("#SaveFile");
         this.$fileInput = this.$element.find("#FileChooser");
@@ -12,13 +14,20 @@ export default class FileControls {
 
         this.$save.on("click", this.saveFilePrompt.bind(this));
         this.$open.on("click", this.openFile.bind(this));
+
+        // save on ctrl+s
+        Mousetrap.bind(["command+s", "ctrl+s"], function() {
+            self.saveFilePrompt();
+            return false;
+        });
+    
+
     }
 
     /**
      * @param {JQuery.Event} e 
      */
     saveFilePrompt(e) {
-        e.stopImmediatePropagation();
 
         let prefix = "LABELMAKER_";
         let defaultProjectName = prefix + moment().format("YYYY-MM-DD-hh-mm-ss-a").toString();
