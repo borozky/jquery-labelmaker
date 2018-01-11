@@ -1,9 +1,7 @@
 import registerServiceWorker from './registerServiceWorker';
 import $ from "jquery";
 import "jquery-ui-bundle";
-import "./scripts/drag-multiple";
 import ruler from "./scripts/ruler";
-import Defaults from "./scripts/Defaults";
 import {app} from "./App";
 import "./styles/index.css";
 
@@ -23,6 +21,7 @@ let myRuler = new ruler({
 });
 
 $(function(){
+    window.myRuler = myRuler;
     window.appCanvas = app.AppCanvas;
     document.body.setAttribute("class", "loaded");
 });

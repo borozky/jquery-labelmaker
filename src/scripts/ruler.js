@@ -1,3 +1,4 @@
+/* eslint-disable */
 // from https://github.com/MrFrankel/ruler/blob/master/dist/ruler.js
 
 var ruler = function (options) {

@@ -1,11 +1,8 @@
-import $ from "jquery";
-import "jquery-ui-bundle";
-import {appFooter} from "./Sections/AppFooter";
-import {leftSidebar} from "./Sections/LeftSidebar";
-import {rightSidebar} from "./Sections/RightSidebar";
-import store from "../scripts/store";
-import JSBarcode from "jsbarcode";
-import moment from "moment";
+import $ from 'jquery';
+import 'jquery-ui-bundle';
+import store from '../scripts/store';
+import JSBarcode from 'jsbarcode';
+import moment from 'moment';
 
 export class AppCanvas {
 
@@ -173,6 +170,8 @@ export class AppCanvas {
                     }
                 });
                 break;
+            default:
+                break;
         }
 
         $element.draggable({
@@ -213,7 +212,7 @@ export class AppCanvas {
         }
 
         let $element = this.$element.find("#" + id);
-        let data = $element.data("labelmaker");
+        $element.data("labelmaker");
 
         if (item.selected) {
             $element.addClass("ui-selected");

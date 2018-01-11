@@ -1,8 +1,8 @@
-import $ from "jquery";
-import {appCanvas} from "../AppCanvas";
-import {siteModal} from "../Sections/SiteModal";
-import store from "../store";
-import html2canvas from "html2canvas";
+import $ from 'jquery';
+import {appCanvas} from '../AppCanvas';
+import {siteModal} from '../Sections/SiteModal';
+import store from '../store';
+import html2canvas from 'html2canvas';
 
 export default class PrintControls {
     constructor() {
@@ -65,8 +65,6 @@ export default class PrintControls {
      */
     previewClicked(e) {
         store.dispatch({ type: "UNSELECT_ALL_ITEMS" })
-
-        let {width, height, units} = store.getState().settings;
 
         // open modal, hide other sections
         let $previewParent = siteModal.openSection("#PreviewParent");

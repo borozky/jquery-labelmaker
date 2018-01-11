@@ -35,19 +35,19 @@ export default class FontStyleControl {
     setItem(item) {
         this.item = item;
 
-        if (item.fontWeight == "bold") {
+        if (item.fontWeight === "bold") {
             this.$fontBold.addClass("active");
         } else {
             this.$fontBold.removeClass("active");
         }
 
-        if (item.fontStyle == "italic") {
+        if (item.fontStyle === "italic") {
             this.$fontItalic.addClass("active");
         } else {
             this.$fontItalic.removeClass("active");
         }
 
-        if (item.textDecoration == "underline") {
+        if (item.textDecoration === "underline") {
             this.$fontUnderline.addClass("active");
         } else {
             this.$fontUnderline.removeClass("active");

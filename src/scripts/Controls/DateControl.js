@@ -1,8 +1,7 @@
-import $ from "jquery";
-import store from "../store";
-import moment from "moment";
-import {siteModal} from "../Sections/SiteModal";
-import "../../../node_modules/jquery-ui-timepicker-addon/dist/jquery-ui-timepicker-addon.css";
+import $ from 'jquery';
+import store from '../store';
+import {siteModal} from '../Sections/SiteModal';
+import '../../../node_modules/jquery-ui-timepicker-addon/dist/jquery-ui-timepicker-addon.css';
 
 require("jquery-ui-timepicker-addon");
 

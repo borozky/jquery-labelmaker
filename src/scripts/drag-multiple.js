@@ -1,12 +1,11 @@
-import jQuery from "jquery";
+/* eslint-disable */
+var jQuery = require("jquery");
 
 /*! Drag Multiple Plugin - v0.1.2 - 2017-10-16
 * https://github.com/javadoug/jquery.drag-multiple
 * Copyright (c) 2017 Doug Ross; Licensed MIT */
 /*globals jQuery */
 (function ($) {
-
-    "use strict";
 
     var options = {
 

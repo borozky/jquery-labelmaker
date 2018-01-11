@@ -1,22 +1,21 @@
-import $ from "jquery";
-import store from "../store";
+import $ from 'jquery';
+import store from '../store';
 
-import {valueControl} from "../Controls/ValueControl";
-import {dateControl} from "../Controls/DateControl"
-import {fontControl} from "../Controls/FontControl"
-import {fontStyleControl} from "../Controls/FontStyleControl"
-import {alignmentControl} from "../Controls/AlignmentControl"
-import {textColorControl} from "../Controls/TextColorControl"
-import {backgroundControl} from "../Controls/BackgroundControl"
-import {sizeControl} from "../Controls/SizeControl"
-import {borderControl} from "../Controls/BorderControl"
-import {itemControl} from "../Controls/ItemControl"
-import {imageControl} from "../Controls/ImageControl"
-import {barcodeValueControl} from "../Controls/BarcodeValueControl";
-import {barcodeLineControl} from "../Controls/BarcodeLineControl";
-import {spacingAndLineHeightControl} from "../Controls/SpacingAndLineHeightControl";
-import { lineControls } from "../Controls/LineControl";
-import {placeholderControls} from "../Controls/PlaceholderControls";
+import {valueControl} from '../Controls/ValueControl';
+import {dateControl} from '../Controls/DateControl';
+import {fontControl} from '../Controls/FontControl';
+import {fontStyleControl} from '../Controls/FontStyleControl';
+import {alignmentControl} from '../Controls/AlignmentControl';
+import {textColorControl} from '../Controls/TextColorControl';
+import {backgroundControl} from '../Controls/BackgroundControl';
+import {sizeControl} from '../Controls/SizeControl';
+import {borderControl} from '../Controls/BorderControl';
+import {itemControl} from '../Controls/ItemControl';
+import {imageControl} from '../Controls/ImageControl';
+import {barcodeValueControl} from '../Controls/BarcodeValueControl';
+import {barcodeLineControl} from '../Controls/BarcodeLineControl';
+import {spacingAndLineHeightControl} from '../Controls/SpacingAndLineHeightControl';
+import { lineControls } from '../Controls/LineControl';
 
 
 export default class RightSidebar {

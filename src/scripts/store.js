@@ -32,7 +32,7 @@ function getPlaceholders(items = []) {
         const str = item.value;
         let m;
 
-        while ((m = regex.exec(str)) !== null) {
+        while ((m = regex.exec(str)) !== null) { // eslint-disable-line
             if (m.index === regex.lastIndex) {
                 regex.lastIndex++;
             }
@@ -47,7 +47,6 @@ function getPlaceholders(items = []) {
 
 export function canvas(state = initialCanvasState, action = {}) {
     let items = [];
-    let placeholders = [];
 
     switch (action.type) {
         case "ADD_CANVAS_ITEM":
@@ -114,8 +113,7 @@ export function canvas(state = initialCanvasState, action = {}) {
                 ...item, selected: false
             }));
 
-        default:
-            return state;
+        default: return state; // eslint-disable-line
     }
 
     return {

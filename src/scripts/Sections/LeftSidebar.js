@@ -1,8 +1,6 @@
-import $ from "jquery";
-import store from "../store";
-import defaultImage from "../../images/image.png";
-import moment from "moment";
-import {itemNavigation} from "./ItemNavigation";
+import $ from 'jquery';
+import store from '../store';
+import defaultImage from '../../images/image.png';
 
 export default class LeftSidebar {
     options = {

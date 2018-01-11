@@ -1,13 +1,13 @@
-import $ from "jquery"
-import store from "../store"
+import $ from 'jquery';
+import store from '../store';
 
 export default class LineControl {
     constructor() {
-        this.$element = $("#LineControl")
-        this.$length = this.$element.find("input[name='length']")
-        this.$thickness = this.$element.find("input[name='thickness']")
-        this.$orientation = this.$element.find("input[name='orientation']")
-        this.$lineColor = this.$element.find("input[name='line-color']")
+        this.$element = $("#LineControl");
+        this.$length = this.$element.find("input[name='length']");
+        this.$thickness = this.$element.find("input[name='thickness']");
+        this.$orientation = this.$element.find("input[name='orientation']");
+        this.$lineColor = this.$element.find("input[name='line-color']");
 
         this.$length.on("input change paste keyup", this.lengthChanged.bind(this))
         this.$thickness.on("input change paste keyup", this.thicknessChanged.bind(this));
@@ -87,7 +87,7 @@ export default class LineControl {
         this.item = item
         this.$length.val(item.width)
         this.$thickness.val(item.height)
-        this.$orientation.filter(function() { this.value === item.orientation}).prop("checked", true)
+        this.$orientation.filter(function() { return this.value === item.orientation}).prop("checked", true)
         this.$lineColor.val(item.backgroundColor)
     }
 

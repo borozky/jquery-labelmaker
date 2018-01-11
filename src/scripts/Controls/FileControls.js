@@ -1,15 +1,12 @@
-import $ from "jquery"
-import moment from "moment"
-import FileSaver from "file-saver"
-import {siteModal} from "../Sections/SiteModal"
-import store from "../store";
-import {HTMLGenerator} from '../generators';
-import html2canvas from 'html2canvas';
+import $ from 'jquery';
+import moment from 'moment';
+import FileSaver from 'file-saver';
+import store from '../store';
 
 export default class FileControls {
     constructor() {
-        this.$element = $("#FileControls")
-        this.$save = this.$element.find("#SaveFile")
+        this.$element = $("#FileControls");
+        this.$save = this.$element.find("#SaveFile");
         this.$fileInput = this.$element.find("#FileChooser");
         this.$open = this.$element.find("#OpenFile");
 
@@ -29,7 +26,7 @@ export default class FileControls {
         let filetype = "application/json=charset=utf-8";
         let projectName = prompt("Save project as", defaultProjectName);
 
-        if (projectName == null || projectName == "" || projectName.trim().length === 0) {} 
+        if (projectName === null || projectName === "" || projectName.trim().length === 0) {} 
         else {
             let fullFilename = projectName + extension
             FileSaver.saveAs(new Blob([JSON.stringify(store.getState())], {
@@ -49,7 +46,7 @@ export default class FileControls {
         this.$fileInput.on("change", e => {
             e.stopImmediatePropagation();
 
-            if (e.target.files.length == 0) {
+            if (e.target.files.length === 0) {
                 return;
             }
 

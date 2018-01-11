@@ -1,8 +1,6 @@
-import $ from "jquery"
-import moment from "moment"
-import FileSaver from "file-saver"
-import {siteModal} from "../Sections/SiteModal"
-import store from "../store";
+import $ from 'jquery';
+import {siteModal} from '../Sections/SiteModal';
+import store from '../store';
 import {HTMLGenerator} from '../generators';
 import html2canvas from 'html2canvas';
 
@@ -36,7 +34,6 @@ export default class TemplateControls {
         // setup
         let $section = siteModal.openSection("#HTMLGenerator");
         let $templateControl = $section.find("#TemplateControls");
-        let $templatePreview = $section.find("#TemplatePreview");
         let $templatePreviewHTML = $section.find("#TemplatePreviewHTML");
         let $templatePreviewCanvas = $section.find("#TemplatePreviewCanvas");
 
@@ -52,12 +49,12 @@ export default class TemplateControls {
         });
 
 
+
         // setup placeholder
         let items = [...store.getState().canvas.items];
         let settings = {...store.getState().settings};
         let generator = new HTMLGenerator(items, settings);
         let placeholders = store.getState().canvas.placeholders;
-        let placeholderDictionary = {};
         placeholders.forEach(placeholder => {
             generator.setPlaceholder(placeholder, placeholder);
         });

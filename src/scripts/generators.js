@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import JSBarcode from 'jsbarcode';
 import moment from 'moment';
-import html2canvas from 'html2canvas';
 
 export class HTMLGenerator {
     static defaultSettings = {
@@ -11,7 +10,6 @@ export class HTMLGenerator {
     }
 
     constructor(items = [], settings = HTMLGenerator.defaultSettings) {
-        let self = this;
         this.items = items;
         this.settings = settings;
         this.placeholders = {};
