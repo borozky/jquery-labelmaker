@@ -69,3 +69,8 @@
 #RightSidebar .tabs button.active {
     background-color: #f5f5f5;
 }
+
+#PlaceholderControls {
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -1,7 +1,7 @@
-#HTMLGenerator {
+#HTMLGenerator.active {
     height: calc(100% - 20px);
     width: 100%;
-    display: table !important;
+    display: table;
     background-color: #fff;
     padding-top: 20px;
     cursor: default

@@ -64,6 +64,7 @@
 
 #SiteModal.open #ModalContent > div {
     display: none;
+    padding: 20px;
 }
 
 #SiteModal.open #ModalContent > div.active {
