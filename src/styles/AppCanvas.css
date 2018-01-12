@@ -37,24 +37,20 @@
     position: absolute !important;
 }
 
-#AppCanvas .canvas-item:hover, #AppCanvas .canvas-item.ui-selecting {
-    outline: 1px dotted #d2d2d2;
-}
-
 #AppCanvas .canvas-item .ui-icon {
     visibility: hidden;
 }
 
-#AppCanvas .canvas-item:hover .ui-icon, #AppCanvas .canvas-item.ui-selecting .ui-icon {
+#AppCanvas .canvas-item:hover, #AppCanvas .canvas-item.ui-selecting {
+    outline: 1px dotted #d2d2d2;
+}
+
+#AppCanvas .canvas-item:hover .ui-icon, #AppCanvas .canvas-item.ui-selecting .ui-icon, #AppCanvas .canvas-item.ui-selected .ui-icon {
     visibility: visible;
 }
 
-#AppCanvas .canvas-item.ui-selected {
+#AppCanvas .canvas-item.ui-selected, #AppCanvas .canvas-item.ui-selected:hover {
     outline: 1px dashed black;
-}
-
-#AppCanvas .canvas-item.ui-selected .ui-icon {
-    visibility: visible;
 }
 
 #AppCanvas .canvas-item.text, #AppCanvas .canvas-item.textbox, #AppCanvas .canvas-item.date {

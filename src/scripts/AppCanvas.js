@@ -24,6 +24,7 @@ export class AppCanvas {
         });
 
         self.$element.selectable({
+            filter: ".canvas-item", // select .canvas-item only to improve performance, esp with inline SVGs
             selected: function(event, ui) {
                 let $selected = $(ui.selected);
                 if ($selected.hasClass("canvas-item")) {
@@ -93,12 +94,12 @@ export class AppCanvas {
         }
 
         let $element = $("<div class='canvas-item'/>");
-        this.$element.append($element);
         $element.addClass(item.type.toString().toLowerCase());
         $element.attr("data-type", item.type);
         $element.attr("id", item.id.toString());
         $element.attr("title", item.id.toString());
         $element.css({...item});
+        
 
         // DOM
         switch(item.type) {
@@ -206,16 +207,19 @@ export class AppCanvas {
         }
 
         $element.data("labelmaker", item);
+        this.$element.append($element);
     }
 
     updateItem(id, item) {
+        let $element = this.$element.find("#" + id);
+        if($element.data("labelmaker") === item) {
+            return;
+        }
+
         if (item.type === "LINE") {
             this.updateLine(id, item);
             return
         }
-
-        let $element = this.$element.find("#" + id);
-        $element.data("labelmaker");
 
         if (item.selected) {
             $element.addClass("ui-selected");
@@ -350,6 +354,7 @@ export class AppCanvas {
 
     updateLine(id, item) {
         let $element = this.$element.find("#" + id);
+
         let data = $element.data("labelmaker");
         let oldOrientation = data.orientation;
 
