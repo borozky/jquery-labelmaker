@@ -20,16 +20,18 @@ function getPlaceholders(items = []) {
             return;
         }
 
-        if(item.value.indexOf("{{") === -1 ) {
+        let value = item.value.toString();
+
+        if(value.indexOf("{{") === -1 ) {
             return;
         }
 
-        if (item.value.indexOf("}}") === -1) {
+        if (value.indexOf("}}") === -1) {
             return;
         }
 
         const regex = /\{\{[A-Za-z0-9_-]+\}\}/g;
-        const str = item.value;
+        const str = value;
         let m;
 
         while ((m = regex.exec(str)) !== null) { // eslint-disable-line
@@ -160,16 +162,7 @@ export const rootReducer = (state, action) => {
 
 const stateLogger = store => next => action => {
     let result;
-    if (process.env.NODE_ENV === "development") {
-        console.groupCollapsed(`DISPATCHING ${action.type}`);
-        console.log("State BEFORE ACTION", store.getState());
-        result = next(action);
-        console.log("State AFTER ACTION", store.getState());
-        console.groupEnd();
-    } 
-    else {
-        result = next(action);
-    }
+    result = next(action);
     return result;
 }
 

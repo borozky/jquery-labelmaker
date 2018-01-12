@@ -108,7 +108,7 @@ export class AppCanvas {
                 $element.append($(`<span class='value'>${item.value.toString()}</span>`));
                 break;
             case "DATE":
-                let date = moment(item.value).format(item.format);
+                let date = moment(item.value, "DD-MM-YYYY hh:mm:ss a").format(item.format);
                 $element.append($(`<span class='value'>${date}</span>`));
                 break;
             case "LINE":
@@ -237,7 +237,7 @@ export class AppCanvas {
                 break;
             case "DATE":
                 let $date = $element.find(".value");
-                $date.html(moment(item.value).format(item.format));
+                $date.html(moment(item.value, "DD-MM-YYYY hh:mm:ss a").format(item.format));
                 $element.css({...item});
                 break;
             case "IMAGE":

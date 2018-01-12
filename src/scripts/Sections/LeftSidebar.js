@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import store from '../store';
+import moment from 'moment';
 import defaultImage from '../../images/image.png';
 import {itemNavigation} from './ItemNavigation';
 
@@ -77,12 +78,13 @@ export let leftSidebar = new LeftSidebar($("#LeftSidebar"), {
                 })
                 break;
             case "DATE":
+                let format = "DD-MM-YYYY hh:mm:ss a";
                 store.dispatch({
                     type: "ADD_CANVAS_ITEM",
                     payload: {
                         ...item,
-                        value: (new Date()).toLocaleString(),
-                        format: "DD-MM-YYYY hh:mm:ss a"
+                        format: format,
+                        value: moment().format(format),
                     }
                 })
                 break;

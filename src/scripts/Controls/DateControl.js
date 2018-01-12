@@ -14,6 +14,7 @@ export default class DateControl {
         this.$formatHelpLink = this.$element.find("#FormatHelpLink");
         this.$date.datetimepicker({
             showSecond: true,
+            dateFormat: "dd-mm-yy",
             timeFormat: "hh:mm:ss tt"
         });
 
@@ -55,7 +56,7 @@ export default class DateControl {
 
     setItem(item) {
         this.item = item;
-        this.$date.val(item.value.replace(",", ""));
+        this.$date.val(item.value);
         this.$format.val(item.format)
     }
 }

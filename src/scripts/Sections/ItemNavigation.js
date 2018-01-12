@@ -52,7 +52,7 @@ export class ItemNavigation {
                 itemvalue = item.value.toString();
                 break;
             case "DATE":
-                itemvalue = moment(item.value).format(item.format);
+                itemvalue = moment(item.value, "DD-MM-YYYY hh:mm:ss a").format(item.format);
                 break;
             default:
                 break;
@@ -89,7 +89,7 @@ export class ItemNavigation {
                 }
                 break;
             case "DATE":
-                let val = moment(item.value).format(item.format);
+                let val = moment(item.value, "DD-MM-YYYY hh:mm:ss a").format(item.format);
                 if (val.length > 0) {
                     itemvalue = val;
                 }
