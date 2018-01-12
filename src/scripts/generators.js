@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import JSBarcode from 'jsbarcode';
 import moment from 'moment';
+import defaultImage from '../images/image.png';
 
 export class HTMLGenerator {
     static defaultSettings = {
@@ -119,3 +120,111 @@ export class HTMLGenerator {
     }
 
 }
+
+export class CanvasItemGenerator {
+    static defaults = {
+        left: 80, 
+        top: 80,
+        backgroundColor: "transparent",
+        borderWidth: 0,
+        borderColor: "none",
+        value: null,
+        color: "#000000",
+        fontSize: 20,
+        fontFamily: "Arial",
+        textAlign: "left",
+        fontWeight: "normal",
+        fontStyle: "normal",
+        textDecoration: "none",
+        lineHeight: 1,
+        letterSpacing: 1,
+    }
+
+    static makeText(value = "TEXT") {
+        return {
+            ...CanvasItemGenerator.defaults,
+            value: value,
+            type: "TEXT"
+        }
+    }
+
+    static makeTextbox(value = "Lorem ipsum dolor sit amet") {
+        return {
+            ...CanvasItemGenerator.makeText(value),
+            width: 80,
+            height: 80,
+            type: "TEXTBOX",
+        }
+    }
+
+    static makeDate(format = "DD-MM-YYYY hh:mm:ss a") {
+        return {
+            ...CanvasItemGenerator.makeText(moment().format(format)),
+            format: format,
+            type: "DATE",
+        }
+    }
+
+    static makeRectangle(width = 80, height = 80) {
+        return {
+            ...CanvasItemGenerator.defaults,
+            width: width,
+            height: height,
+            backgroundColor: "#dff0fe",
+            borderColor: "#88b5df",
+            borderWidth: 1,
+            borderStyle: "solid",
+            type: "RECTANGLE"
+        }
+    }
+
+    static makeEllipse(width = 80, height = 80) {
+        return {
+            ...CanvasItemGenerator.makeRectangle(width, height),
+            type: "ELLIPSE"
+        }
+    }
+
+    static makeImage(src = defaultImage) {
+        return {
+            ...CanvasItemGenerator.defaults,
+            width: 80,
+            height: 80,
+            value: src,
+            type: "IMAGE"
+        }
+    }
+
+    static makeBarcode(value = "000000000") {
+        return {
+            ...CanvasItemGenerator.defaults,
+            width: 203,
+            height: 132,
+            displayValue: true,
+            lineHeight: 100,
+            lineWidth: 2,
+            margin: 0,
+            value: value,
+            textAlign: "center",
+            renderer: 'svg',
+            marginBottom: 10, // allow space for letters like g,j,p,q,y
+            type: "BARCODE"
+        }
+    }
+
+    static makeLine(length = 300, thickness = 2, vertical = false) {
+        let orientation = vertical ? "vertical" : "horizontal";
+        let width = vertical ? thickness : length;
+        let height = vertical ? length : thickness;
+
+        return {
+            ...CanvasItemGenerator.defaults,
+            width: width,
+            height: height,
+            orientation: orientation,
+            backgroundColor: "#000000",
+            type: "LINE"
+        }
+    }
+}
+
