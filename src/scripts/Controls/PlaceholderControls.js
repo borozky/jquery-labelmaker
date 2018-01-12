@@ -3,7 +3,6 @@ import store from '../store';
 
 class PlaceholderControls {
     constructor() {
-        let self = this;
         this.$element = $("#PlaceholderControls");
 
         store.subscribe(() => {

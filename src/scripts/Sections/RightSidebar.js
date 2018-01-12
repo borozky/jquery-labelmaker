@@ -15,12 +15,14 @@ import {imageControl} from '../Controls/ImageControl';
 import {barcodeValueControl} from '../Controls/BarcodeValueControl';
 import {barcodeLineControl} from '../Controls/BarcodeLineControl';
 import {spacingAndLineHeightControl} from '../Controls/SpacingAndLineHeightControl';
-import { lineControls } from '../Controls/LineControl';
+import {lineControls} from '../Controls/LineControl';
+import {placeholderControls} from '../Controls/PlaceholderControls';
 
 
 export default class RightSidebar {
     constructor($element = $("#RightSidebar")) {
         this.$element = $element;
+        this.placeholderControls = placeholderControls;
 
         this.hideAllControls();
 
