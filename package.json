@@ -22,9 +22,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:e2e": "react-scripts test --env=jsdom e2e-tests",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "chai": "^4.1.2"
+    "chai": "^4.1.2",
+    "nightmare": "^2.10.0"
   }
 }
