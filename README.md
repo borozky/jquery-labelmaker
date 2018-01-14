@@ -3,7 +3,7 @@
 Written by Joshua Orozco (borozky@gmail.com)
 
 Made using:
-- create-react-app (react is removed)
+- create-react-app (React is removed)
 - ES6
 - jQuery
 - Redux
