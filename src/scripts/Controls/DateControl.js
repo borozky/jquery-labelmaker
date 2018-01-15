@@ -56,8 +56,12 @@ export default class DateControl {
 
     setItem(item) {
         this.item = item;
-        this.$date.val(item.value);
-        this.$format.val(item.format)
+        if (item.value !== this.$date.val()) {
+            this.$date.val(item.value);
+        }
+        if(item.format !== this.$format.val()) {
+            this.$format.val(item.format);
+        }
     }
 }
 

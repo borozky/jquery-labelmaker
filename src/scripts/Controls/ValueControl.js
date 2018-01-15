@@ -29,7 +29,9 @@ export default class ValueControl {
 
     setItem(item) {
         this.item = item;
-        this.$value.val(item.value);
+        if(item.value !== this.$value.val()) {
+            this.$value.val(item.value);
+        }
     }
 }
 

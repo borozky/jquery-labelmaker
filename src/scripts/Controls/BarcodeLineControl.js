@@ -40,8 +40,15 @@ export default class BarcodeLineControl {
 
     setItem(item) {
         this.item = item
-        this.$lineWidth.val(Number(item.lineWidth))
-        this.$lineHeight.val(Number(item.lineHeight))
+        const lineWidth = Number(item.lineWidth);
+        const lineHeight = Number(item.lineHeight);
+
+        if(lineWidth !== Number(this.$lineWidth.val())) {
+            this.$lineWidth.val(lineWidth)
+        }
+        if(lineHeight !== Number(this.$lineHeight.val())) {
+            this.$lineHeight.val(lineHeight)
+        }
     }
 }
 

@@ -41,7 +41,10 @@ export default class FontControl {
     setItem(item) {
         this.item = item;
         this.$fontFamily.val(item.fontFamily)
-        this.$fontSize.val(Number(item.fontSize));
+        if(Number(item.fontSize) !== Number(this.$fontSize.val())) {
+            this.$fontSize.val(Number(item.fontSize));
+        }
+
     }
 }
 

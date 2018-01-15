@@ -91,9 +91,15 @@ export default class PrintControls {
 
     setSettings(settings) {
         this.settings = settings;
-        this.$paperWidth.val(Number(this.settings.width));
-        this.$paperHeight.val(Number(this.settings.height));
-        this.$paperUnit.val(this.settings.units);
+        if(Number(this.settings.width) !== Number(this.$paperWidth.val())) {
+            this.$paperWidth.val(Number(this.settings.width));
+        }
+        if(Number(this.settings.height) !== Number(this.$paperHeight.val())) {
+            this.$paperHeight.val(Number(this.settings.height));
+        }
+        if(this.settings.units !== this.$paperUnit.val()) {
+            this.$paperUnit.val(this.settings.units);
+        }
     }
 }
 

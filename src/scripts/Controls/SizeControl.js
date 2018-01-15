@@ -39,8 +39,12 @@ export default class SizeControl {
 
     setItem(item) {
         this.item = item;
-        this.$width.val(Number(item.width));
-        this.$height.val(Number(item.height));
+        if(Number(item.width) !== Number(this.$width.val())) {
+            this.$width.val(Number(item.width));
+        }
+        if(Number(item.height) !== Number(this.$height.val())) {
+            this.$height.val(Number(item.height));
+        }
     }
 }
 

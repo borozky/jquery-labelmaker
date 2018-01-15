@@ -40,7 +40,10 @@ export default class BarcodeValueControl {
 
     setItem(item) {
         this.item = item;
-        this.$barcode.val(item.value);
+        let value = item.value;
+        if(value !== this.$barcode.val()) {
+            this.$barcode.val(item.value);
+        }
         this.$displayValue[0].checked = item.displayValue
     }
 }

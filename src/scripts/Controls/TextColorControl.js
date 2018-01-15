@@ -28,7 +28,10 @@ export default class TextColorControl {
 
     setItem(item) {
         this.item = item;
-        this.$color.val(item.color.toUpperCase().replace("#", ""));
+        let color = item.color.toUpperCase().replace("#", "")
+        if(color !== this.$color.val()) {
+            this.$color.val(item.color.toUpperCase().replace("#", ""));
+        }
         this.$color.css({
             backgroundColor: "#" + item.color.toUpperCase().replace("#", "")
         })

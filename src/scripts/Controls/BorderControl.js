@@ -39,8 +39,14 @@ export default class BorderControl {
 
     setItem(item) {
         this.item = item;
-        this.$borderWidth.val(Number(item.borderWidth));
-        this.$borderColor.val(item.borderColor.toUpperCase().replace("#", ""));
+        const borderWidth = Number(item.borderWidth)
+        const borderColor = item.borderColor.toUpperCase().replace("#", "")
+        if(borderWidth !== Number(this.$borderWidth.val())) {
+            this.$borderWidth.val(Number(item.borderWidth));
+        }
+        if(borderColor !== this.$borderColor.val()) {
+            this.$borderColor.val(borderColor);
+        }
     }
 }
 

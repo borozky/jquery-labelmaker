@@ -85,10 +85,16 @@ export default class LineControl {
 
     setItem(item) {
         this.item = item
-        this.$length.val(item.width)
-        this.$thickness.val(item.height)
+        if( Number(item.width) !== Number(this.$length.val()) )  {
+            this.$length.val(Number(item.width))
+        }
+        if(Number(item.height) !== Number(this.$thickness.val())) {
+            this.$thickness.val(Number(item.height))
+        }
+        if(item.backgroundColor !== this.$lineColor.val()) {
+            this.$lineColor.val(item.backgroundColor)
+        }
         this.$orientation.filter(function() { return this.value === item.orientation}).prop("checked", true)
-        this.$lineColor.val(item.backgroundColor)
     }
 
 

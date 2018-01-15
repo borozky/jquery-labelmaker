@@ -40,8 +40,12 @@ export default class SpacingAndLineHeightControl {
     }
     setItem(item) {
         this.item = item
-        this.$letterSpacing.val(Number(item.letterSpacing))
-        this.$lineHeight.val(Number(item.lineHeight))
+        if(Number(item.letterSpacing) !== Number(this.$letterSpacing.val())) {
+            this.$letterSpacing.val(Number(item.letterSpacing))
+        }
+        if(Number(item.lineHeight) !== Number(this.$lineHeight.val())) {
+            this.$lineHeight.val(Number(item.lineHeight))
+        }
     }
 }
 

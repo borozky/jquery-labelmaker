@@ -29,7 +29,10 @@ export default class BackgroundControl {
 
     setItem(item) {
         this.item = item;
-        this.$backgroundColor.val(item.backgroundColor.toUpperCase().replace("#", ""));
+        let val = item.backgroundColor.toUpperCase().replace("#", "");
+        if (val !== this.$backgroundColor.val()) {
+            this.$backgroundColor.val(val);
+        }
     }
 }
 
