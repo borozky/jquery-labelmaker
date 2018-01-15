@@ -3,22 +3,24 @@ import store from '../store';
 import moment from 'moment';
 import defaultImage from '../../images/image.png';
 import {itemNavigation} from './ItemNavigation';
+import {CanvasItemGenerator} from '../generators';
 
 
 export default class LeftSidebar {
-    options = {
-        onCreate: function() {}
-    }
 
-    constructor($element = $("#LeftSidebar"), options = {onCreate:function(itemType){} }) {
-        this.$element = $element;
-        this.itemNavigation = itemNavigation;
-        this.options = {...this.options, ...options};
-
+    constructor() {
         let self = this;
+        this.$element = $("#LeftSidebar");
+        this.itemNavigation = itemNavigation;
+
         this.$element.find(".item-types").on("click", function(e) {
             let itemType = $(this).attr("data-type").toString();
-            self.options.onCreate(itemType);
+            store.dispatch({
+                type: "ADD_CANVAS_ITEM",
+                payload: {
+                    ...self.makeCanvasItem(itemType)
+                }
+            });
         });
 
         // when left sidebar is clicked (except its li and inner items)
@@ -31,121 +33,44 @@ export default class LeftSidebar {
             }
         });
     }
-}
 
-
-export let leftSidebar = new LeftSidebar($("#LeftSidebar"), {
-    onCreate: function(itemType) {
-
-        let item = {
-            left: 80, 
-            top: 80,
-            backgroundColor: "transparent",
-            borderWidth: 0,
-            borderColor: "none",
-            value: null,
-            color: "#000000",
-            fontSize: 20,
-            fontFamily: "Arial",
-            textAlign: "left",
-            fontWeight: "normal",
-            fontStyle: "normal",
-            textDecoration: "none",
-            lineHeight: 1,
-            letterSpacing: 1,
-            type: itemType
-        }
+    makeCanvasItem(itemType) {
+        let item;
 
         switch(itemType) {
             case "TEXT":
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        value: "TEXT"
-                    }
-                });
+                item = CanvasItemGenerator.makeText();
                 break;
             case "TEXTBOX":
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        width: 80,
-                        height: 80,
-                        value: "Lorem ipsum dolor sit amet"
-                    }
-                })
+                item = CanvasItemGenerator.makeTextbox();
                 break;
             case "DATE":
-                let format = "DD-MM-YYYY hh:mm:ss a";
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        format: format,
-                        value: moment().format(format),
-                    }
-                })
+                item = CanvasItemGenerator.makeDate();
                 break;
             case "RECTANGLE":
+                item = CanvasItemGenerator.makeRectangle();
+                break;
             case "ELLIPSE":
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        width: 80,
-                        height: 80,
-                        backgroundColor: "#dff0fe",
-                        borderColor: "#88b5df",
-                        borderWidth: 1,
-                        borderStyle: "solid"
-                    }
-                })
+                item = CanvasItemGenerator.makeEllipse();
                 break;
             case "IMAGE":
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        width: 80,
-                        height: 80,
-                        value: defaultImage,
-                    }
-                });
+                item = CanvasItemGenerator.makeImage();
                 break;
             case "BARCODE":
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        width: 203,
-                        height: 132,
-                        value: "000000000",
-                        displayValue: true,
-                        lineHeight: 100,
-                        lineWidth: 2,
-                        margin: 0,
-                        textAlign: "center",
-                        marginBottom: 10, // allow space for letters like g,j,p,q,y
-                    }
-                });
+                item = CanvasItemGenerator.makeBarcode();
                 break;
             case "LINE":
-                store.dispatch({
-                    type: "ADD_CANVAS_ITEM",
-                    payload: {
-                        ...item,
-                        width: 300,
-                        height: 2,
-                        orientation: "horizontal",
-                        backgroundColor: "#000000",
-                    }
-                });
+                item = CanvasItemGenerator.makeLine();
                 break;
             default:
                 alert("Adding new " + itemType + " is currently not supported");
                 return;
         }
+
+        return item;
     }
-});
+
+}
+
+
+export let leftSidebar = new LeftSidebar();

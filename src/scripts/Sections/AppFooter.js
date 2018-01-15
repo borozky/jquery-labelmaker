@@ -2,9 +2,9 @@ import $ from "jquery";
 import store from "../store";
 
 export default class AppFooter {
-    constructor($element = $("#AppFooter")) {
+    constructor($element = $("#AppFooter"), $coordinates = $("#Coordinates"), store = store) {
         this.$element = $element;
-        this.$coordinates = this.$element.find("#Coordinates");
+        this.$coordinates = $coordinates;
 
         store.subscribe(() => {
             let selected = store.getState().canvas.items.filter(item => item.selected);
@@ -19,4 +19,4 @@ export default class AppFooter {
     }
 }
 
-export let appFooter = new AppFooter();
+export let appFooter = new AppFooter($("#AppFooter"), $("#Coordinates"), store);
