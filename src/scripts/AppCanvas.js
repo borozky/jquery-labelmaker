@@ -1,11 +1,17 @@
 import $ from 'jquery';
-import 'jquery-ui-bundle';
 import store from '../scripts/store';
 import JSBarcode from 'jsbarcode';
 import moment from 'moment';
 import Mousetrap from 'mousetrap';
+import {doPolygonsIntersect, getElementCornerCoordinates, getElementRotation} from '../scripts/helpers';
+import "../libs/jquery-ui-rotatable/jquery.ui.rotatable";
+import "../libs/jquery-ui-rotatable/jquery.ui.rotatable.css";
+import "../libs/jQuery-ui-resizable-rotation-patch/resizable-rotation.patch";
 
 export class AppCanvas {
+
+    /** @type {JQuery<HTMLElement>} */
+    $element;
 
     constructor() {
         let self = this;
@@ -13,43 +19,17 @@ export class AppCanvas {
 
         self.setupKeyboardEvents();
 
-        // .canvas-item is dynamically created item. Use delegates
-        self.$element.on("click", ".canvas-item", function(e) {
-            store.dispatch({
-                type: "SELECT_SINGLE_CANVAS_ITEM",
-                payload: {
-                    id: $(this).attr("id"),
-                }
-            })
-        });
-
         self.$element.selectable({
             filter: ".canvas-item", // select .canvas-item only to improve performance, esp with inline SVGs
-            selected: function(event, ui) {
-                let $selected = $(ui.selected);
-                if ($selected.hasClass("canvas-item")) {
-                    store.dispatch({
-                        type: "UPDATE_CANVAS_ITEM",
-                        payload: {
-                            id: $selected.attr("id"),
-                            selected: true
-                        }
-                    })
-                }
-            },
-            unselected: function(event, ui) {
-                let $unselected = $(ui.unselected);
-                if ($unselected.hasClass("canvas-item")) {
-                    store.dispatch({
-                        type: "UPDATE_CANVAS_ITEM",
-                        payload: {
-                            id: $unselected.attr("id"),
-                            selected: false
-                        }
-                    });
-                }
-            }
+            tolerance: "touch"
         });
+
+        self.$element.on("selectableselected", this.handleSelectableSelected);
+        self.$element.on("selectableunselected", this.handleSelectableUnselected);
+        self.$element.on("selectablestop", this.handleSelectableStop);
+
+        // .canvas-item is dynamically created item. Use delegates
+        self.$element.on("click", ".canvas-item", this.handleCanvasItemClicked);
 
         store.subscribe(() => {
 
@@ -86,20 +66,102 @@ export class AppCanvas {
         });
     }
 
-    addItem(item) {
+    /** @param {JQuery.Event<HTMLElement, null>} e */
+    handleCanvasItemClicked(e) {
+        /** @type {HTMLElement} */
+        let self = this;
+        store.dispatch({
+            type: "SELECT_SINGLE_CANVAS_ITEM",
+            payload: {
+                id: $(self).attr("id")
+            }
+        })
+    }
 
-        if (item.type === "LINE") {
-            this.createLine(item);
-            return;
+    handleSelectableSelected(event, ui) {
+        let $selected = $(ui.selected);
+        if ($selected.hasClass("canvas-item")) {
+            store.dispatch({
+                type: "UPDATE_CANVAS_ITEM",
+                payload: {
+                    id: $selected.attr("id"),
+                    selected: true
+                }
+            })
         }
+    }
+
+    handleSelectableUnselected(event, ui) {
+        let $unselected = $(ui.unselected);
+        if ($unselected.hasClass("canvas-item")) {
+            store.dispatch({
+                type: "UPDATE_CANVAS_ITEM",
+                payload: {
+                    id: $unselected.attr("id"),
+                    selected: false
+                }
+            });
+        }
+    }
+
+    handleSelectableStop(event, ui) {
+        let $helper = $(".ui-selectable-helper");
+        let $appCanvas = $("#AppCanvas");
+
+        let helperCornerPoints = [
+            { 
+                x: $helper.offset().left - $appCanvas.offset().left,
+                y: $helper.offset().top - $appCanvas.offset().top
+            }, // nw
+            { 
+                x: $helper.offset().left - $appCanvas.offset().left + $helper.width(), 
+                y: $helper.offset().top - $appCanvas.offset().top
+            }, // ne
+            { 
+                x: $helper.offset().left - $appCanvas.offset().left + $helper.width(), 
+                y: $helper.offset().top - $appCanvas.offset().top + $helper.height() 
+            }, // se
+            { 
+                x: $helper.offset().left - $appCanvas.offset().left , 
+                y: $helper.offset().top - $appCanvas.offset().top + $helper.height() 
+            }  // sw
+        ];
+
+        $(".canvas-item").each(function() {
+            var pointsA = getElementCornerCoordinates(this);
+            let doesIntersect = doPolygonsIntersect(pointsA, helperCornerPoints);
+            if (doesIntersect && $(this).hasClass("ui-selected") === false) {
+                $(this).addClass("ui-selected");
+                store.dispatch({
+                    type: "UPDATE_CANVAS_ITEM",
+                    payload: {
+                        id: $(this).attr("id"),
+                        selected: true
+                    }
+                })
+                return;
+            }
+
+            if (doesIntersect === false) {
+                $(this).removeClass("ui-selected");
+                store.dispatch({
+                    type: "UPDATE_CANVAS_ITEM",
+                    payload: {
+                        id: $(this).attr("id"),
+                        selected: false
+                    }
+                })
+            }
+        })
+    }
+
+    addItem(item) {
 
         let $element = $("<div class='canvas-item'/>");
         $element.addClass(item.type.toString().toLowerCase());
         $element.attr("data-type", item.type);
         $element.attr("id", item.id.toString());
         $element.attr("title", item.id.toString());
-        $element.css({...item});
-        
 
         // DOM
         switch(item.type) {
@@ -153,8 +215,11 @@ export class AppCanvas {
             case "ELLIPSE":
             case "IMAGE":
             case "BARCODE":
+            case "LINE":
                 $element.resizable({
-                    start: function() {
+                    // grid: 3      // DO NOT USE grids! The resize-rotation patch is not working very well with grids. 
+                    handles: item.type === "LINE" ? "w, e" : 'ne, nw, se, sw, n, w, s, e' ,
+                    start: function(event, ui) {
                         store.dispatch({
                             type: "SELECT_SINGLE_CANVAS_ITEM",
                             payload: {
@@ -168,7 +233,9 @@ export class AppCanvas {
                             payload: {
                                 id: item.id,
                                 width: ui.size.width,
-                                height: ui.size.height
+                                height: item.type === "LINE" ? item.height : ui.size.height,
+                                left: ui.position.left,
+                                top: ui.position.top
                             }
                         })
                     }
@@ -178,14 +245,46 @@ export class AppCanvas {
                 break;
         }
 
+        $element.rotatable({
+            handleOffset: item.type === "LINE" ? { top: -10, left: 20 } : {top: 0, left: -20},
+            snap: true,
+            step: 2.0,
+            wheelRotate: false,
+            stop: function(event, ui) {
+                let angle = Math.round(getElementRotation(this));
+                let id = $(this).attr("id");
+                store.dispatch({
+                    type: "UPDATE_CANVAS_ITEM",
+                    payload: {
+                        id: id,
+                        transform: `rotate(${angle}deg)`
+                    }
+                })
+            }
+        });
+
+        // https://stackoverflow.com/questions/3523747/webkit-and-jquery-draggable-jumping
+        var recoupLeft, recoupTop;
         $element.draggable({
+            grid: [2,2],
             start: function(event, ui) {
+                var left = parseInt($(this).css('left'),10);
+                left = isNaN(left) ? 0 : left;
+                var top = parseInt($(this).css('top'),10);
+                top = isNaN(top) ? 0 : top;
+                recoupLeft = left - ui.position.left;
+                recoupTop = top - ui.position.top;
+
                 store.dispatch({
                     type: "SELECT_SINGLE_CANVAS_ITEM",
                     payload: {
                         id: item.id,
                     }
                 })
+            },
+            drag: function(event, ui) {
+                ui.position.left += recoupLeft;
+                ui.position.top += recoupTop;
             },
             stop: function(event, ui) {
                 store.dispatch({
@@ -207,18 +306,16 @@ export class AppCanvas {
         }
 
         $element.data("labelmaker", item);
+        $element.css({...item});
+
         this.$element.append($element);
     }
 
     updateItem(id, item) {
         let $element = this.$element.find("#" + id);
-        if($element.data("labelmaker") === item) {
+        let currentData = $element.data("labelmaker");
+        if(currentData === item) {
             return;
-        }
-
-        if (item.type === "LINE") {
-            this.updateLine(id, item);
-            return
         }
 
         if (item.selected) {
@@ -226,24 +323,20 @@ export class AppCanvas {
         } else {
             $element.removeClass("ui-selected");
         }
-        
 
         switch(item.type) {
             case "TEXT":
             case "TEXTBOX":
                 let $value = $element.find(".value");
                 $value.html(item.value);
-                $element.css({...item});
                 break;
             case "DATE":
                 let $date = $element.find(".value");
                 $date.html(moment(item.value, "DD-MM-YYYY hh:mm:ss a").format(item.format));
-                $element.css({...item});
                 break;
             case "IMAGE":
                 let $img = $element.find("img")[0];
                 $img.src = item.value;
-                $element.css({...item});
                 break;
             case "BARCODE":
                 let $barcode = $element.find("svg")[0];
@@ -265,16 +358,16 @@ export class AppCanvas {
                     background: "transparent",
                     fontOptions: fontOptions.join(" ")
                 })
-                $element.css({...item});
                 break;
             case "RECTANGLE":
             case "ELLIPSE":
-                $element.css({...item});
-                break
+            case "LINE":
+                break;
             default:
                 break;
         }
 
+        $element.css({...item});
         $element.data("labelmaker", item);
     }
 
@@ -284,111 +377,6 @@ export class AppCanvas {
             height: `${height}${units}`
         })
     }
-
-    createLine(item) {
-        let $element = $("<div class='canvas-item'/>");
-        $element.addClass(item.type.toString().toLowerCase());
-        $element.attr("data-type", item.type);
-        $element.attr("id", item.id.toString());
-        $element.css({...item});
-
-        $element.resizable({
-            handles: "w, e",
-            stop: function(event, ui) {
-                console.log(this);
-                let data = $(this).data("labelmaker");
-                let width = ui.size.width;
-                let height = ui.size.height
-
-                if (data.orientation === "vertical") {
-                    width = ui.size.height
-                    height = ui.size.width
-                }
-
-                store.dispatch({
-                    type: "UPDATE_CANVAS_ITEM",
-                    payload: {
-                        id: item.id,
-                        width: width,
-                        height: height,
-                        left: ui.position.left,
-                        top: ui.position.top,
-                    }
-                })
-            },
-            start: function() {
-                store.dispatch({
-                    type: "SELECT_SINGLE_CANVAS_ITEM",
-                    payload: {
-                        id: item.id
-                    }
-                })
-            },
-        });
-
-        $element.draggable({
-            start: function(event, ui) {
-                store.dispatch({
-                    type: "SELECT_SINGLE_CANVAS_ITEM",
-                    payload: {
-                        id: item.id,
-                    }
-                })
-            },
-            stop: function(event, ui) {
-                store.dispatch({
-                    type: "UPDATE_CANVAS_ITEM",
-                    payload: {
-                        id: item.id,
-                        left: ui.position.left,
-                        top: ui.position.top,
-                        selected: true,
-                    }
-                })
-            },
-        })
-        this.$element.append($element);
-        $element.data("labelmaker", item);
-
-    }
-
-    updateLine(id, item) {
-        let $element = this.$element.find("#" + id);
-
-        let data = $element.data("labelmaker");
-        let oldOrientation = data.orientation;
-
-        if (item.selected) {
-            $element.addClass("ui-selected");
-        } else {
-            $element.removeClass("ui-selected");
-        }
-
-        
-        if (item.orientation === "horizontal") {
-            $element.css({
-                width: item.width,
-                height: item.height,
-                backgroundColor: item.backgroundColor
-            })
-        } 
-        else if (item.orientation === "vertical") {
-            $element.css({
-                height: item.width,
-                width: item.height,
-                backgroundColor: item.backgroundColor
-            })
-        }
-
-        $element.data("labelmaker", item);
-
-        if (oldOrientation === item.orientation) {
-            return;
-        } 
-
-        $element.resizable("option", "handles", item.orientation === "vertical" ? "n, s" : "e, w")
-    }
-
 
     setupKeyboardEvents() {
 
@@ -455,8 +443,6 @@ export class AppCanvas {
                 }
             }
         });
-
-        
 
     }
 

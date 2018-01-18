@@ -138,6 +138,7 @@ export class CanvasItemGenerator {
         textDecoration: "none",
         lineHeight: 1,
         letterSpacing: 1,
+        transform: "rotate(0deg)"
     }
 
     static makeText(value = "TEXT") {
@@ -212,16 +213,11 @@ export class CanvasItemGenerator {
         }
     }
 
-    static makeLine(length = 300, thickness = 2, vertical = false) {
-        let orientation = vertical ? "vertical" : "horizontal";
-        let width = vertical ? thickness : length;
-        let height = vertical ? length : thickness;
-
+    static makeLine(length = 300, thickness = 2) {
         return {
             ...CanvasItemGenerator.defaults,
-            width: width,
-            height: height,
-            orientation: orientation,
+            width: length,
+            height: thickness,
             backgroundColor: "#000000",
             type: "LINE"
         }

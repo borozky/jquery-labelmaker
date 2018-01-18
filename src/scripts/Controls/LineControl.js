@@ -6,12 +6,10 @@ export default class LineControl {
         this.$element = $("#LineControl");
         this.$length = this.$element.find("input[name='length']");
         this.$thickness = this.$element.find("input[name='thickness']");
-        this.$orientation = this.$element.find("input[name='orientation']");
         this.$lineColor = this.$element.find("input[name='line-color']");
 
         this.$length.on("input change paste keyup", this.lengthChanged.bind(this))
         this.$thickness.on("input change paste keyup", this.thicknessChanged.bind(this));
-        this.$orientation.on("change", this.orientationChanged.bind(this));
         this.$lineColor.on("input change paste keyup", this.lineColorChanged.bind(this));
 
         store.subscribe(() => {
@@ -52,21 +50,6 @@ export default class LineControl {
         })
     }
 
-    /**
-     * 
-     * @param {Event} e 
-     */
-    orientationChanged(e) {
-        let orientation = this.$element.find("input[name='orientation']:checked").val();
-        console.log(orientation)
-        store.dispatch({
-            type: "UPDATE_CANVAS_ITEM",
-            payload: {
-                id: this.item.id,
-                orientation: orientation
-            }
-        })
-    }
 
     /**
      * 
@@ -94,7 +77,6 @@ export default class LineControl {
         if(item.backgroundColor !== this.$lineColor.val()) {
             this.$lineColor.val(item.backgroundColor)
         }
-        this.$orientation.filter(function() { return this.value === item.orientation}).prop("checked", true)
     }
 
 

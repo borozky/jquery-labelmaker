@@ -1,7 +1,5 @@
 import $ from 'jquery';
 import store from '../store';
-import moment from 'moment';
-import defaultImage from '../../images/image.png';
 import {itemNavigation} from './ItemNavigation';
 import {CanvasItemGenerator} from '../generators';
 

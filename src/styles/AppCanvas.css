@@ -37,8 +37,20 @@
     position: absolute !important;
 }
 
-#AppCanvas .canvas-item .ui-icon {
+#AppCanvas .canvas-item .ui-icon, #AppCanvas .canvas-item .ui-rotatable-handle {
     visibility: hidden;
+}
+
+#AppCanvas .canvas-item.ui-selected .ui-rotatable-handle {
+    visibility: visible;
+}
+
+.ui-rotatable-handle {
+    position: absolute !important;
+}
+
+.ui-resizable-handle {
+    cursor: pointer !important;
 }
 
 #AppCanvas .canvas-item:hover, #AppCanvas .canvas-item.ui-selecting {

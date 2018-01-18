@@ -1,8 +1,8 @@
 import $ from "jquery";
-import store from "../store";
+import _store from "../store";
 
 export default class AppFooter {
-    constructor($element = $("#AppFooter"), $coordinates = $("#Coordinates"), store = store) {
+    constructor($element = $("#AppFooter"), $coordinates = $("#Coordinates"), store = _store) {
         this.$element = $element;
         this.$coordinates = $coordinates;
 
@@ -19,4 +19,4 @@ export default class AppFooter {
     }
 }
 
-export let appFooter = new AppFooter($("#AppFooter"), $("#Coordinates"), store);
+export let appFooter = new AppFooter($("#AppFooter"), $("#Coordinates"), _store);
