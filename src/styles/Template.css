@@ -58,8 +58,17 @@
     position: relative;
 }
 
+#TemplatePreviewHTML {
+    overflow: hidden;
+}
+
 #TemplatePreviewCanvas {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+#TemplatePreviewCanvas canvas {
+    -webkit-box-shadow: 0 0 0.5cm rgba(0,0,0,.5);
+    box-shadow: 0 0 0.5cm rgba(0,0,0,.5);
 }
