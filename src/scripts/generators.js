@@ -213,7 +213,7 @@ export class CanvasItemGenerator {
         }
     }
 
-    static makeLine(length = 300, thickness = 2) {
+    static makeLine(length = 300, thickness = 3) {
         return {
             ...CanvasItemGenerator.defaults,
             width: length,
