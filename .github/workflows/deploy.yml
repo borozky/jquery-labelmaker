@@ -1,9 +1,11 @@
 name: remote ssh command
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
-
   build:
-    name: Build
+    name: SSH, compile and deploy
     runs-on: ubuntu-latest
     steps:
     - name: SSH Remote Commands
