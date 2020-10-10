@@ -14,5 +14,10 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          whoami
-          ls -ltra
+          cd ${{ secrets.BASE_DIR }}
+          git reset --hard
+          git clean -df
+          git checkout master
+          git pull origin master
+          yarn install --production=true
+          yarn build
