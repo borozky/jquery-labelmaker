@@ -19,5 +19,4 @@ jobs:
           git clean -df
           git checkout master
           git pull origin master
-          yarn --production
-          yarn build
+          yarn --version
