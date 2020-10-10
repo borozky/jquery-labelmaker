@@ -17,9 +17,10 @@ jobs:
           cd ${{ secrets.BASE_DIR }}
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
-          npm --help
           git reset --hard
           git clean -df
           git checkout master
           git pull origin master
-          yarn --version
+          yarn --production
+          yarn run build
+          
