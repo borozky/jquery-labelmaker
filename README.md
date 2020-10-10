@@ -1,8 +1,8 @@
-## LabelMaker
+# LabelMaker
 
 Written by Joshua Orozco (borozky@gmail.com)
 
-Made using:
+## Uses
 - create-react-app (React is removed)
 - ES6
 - jQuery
@@ -10,7 +10,14 @@ Made using:
 - FileSaver.js
 - JsBarcode
 
-How to run:
-1. Clone this repo. Navigate to folder <code>cd jquery-labelmaker</code>
-2. Install dependencies <code>npm install</code>
-3. Run the app using <code>npm start</code>
+## Setup locally
+```
+yarn install
+yarn start
+```
+
+## Deployment
+```
+yarn install --production=true
+yarn build
+```

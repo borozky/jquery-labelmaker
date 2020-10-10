@@ -2,7 +2,7 @@
   "name": "jquerylabelmaker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://35.203.176.225/jquery-labelmaker",
+  "homepage": "https://labelmaker.borozky.com",
   "dependencies": {
     "file-saver": "^1.3.3",
     "html2canvas": "^1.0.0-alpha.5",
