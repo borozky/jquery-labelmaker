@@ -19,5 +19,5 @@ jobs:
           git clean -df
           git checkout master
           git pull origin master
-          yarn install --production=true
-          yarn build
+          /usr/bin/yarn install --production=true
+          /usr/bin/yarn build
