@@ -1,7 +1,5 @@
 # LabelMaker
 
-Written by Joshua Orozco (borozky@gmail.com)
-
 ## Demo
 [https://labelmaker.borozky.com](https://labelmaker.borozky.com)
 
