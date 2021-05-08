@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: SSH, compile and deploy
+    name: Install, build and rsync
     runs-on: ubuntu-18.04
 
     steps:
@@ -19,13 +19,21 @@ jobs:
       with:
         node-version: 12.x
 
+    - name: Cache node_modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('yarn.lock') }}
+
     - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
       run: yarn install --frozen-lockfile --production=true
 
     - name: Build
       run: yarn build
 
-    - name: "Rsync target folder to remote"
+    - name: "Rsync build folder to remote"
       uses: Pendect/action-rsyncer@v1.1.0
       env:
         DEPLOY_KEY: ${{ secrets.KEY }}
