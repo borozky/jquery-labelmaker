@@ -42,5 +42,5 @@ jobs:
         options: ''
         ssh_options: '-p 22'
         src: ./build/
-        dest: ${{ secrets.USER }}@${{ secrets.HOST }}:/home/${{ secrets.USER }}/labelmaker.${{ secrets.USER }}.com/
+        dest: ${{ secrets.USER }}@${{ secrets.HOST }}:/home/${{ secrets.USER }}/labelmaker.borozky.com/
           
